@@ -33,7 +33,7 @@ export function SidebarLink({ icon, text, isSidebarOpen }: SidebarLinkProps) {
         {isSidebarOpen ? (
           <NavLink.Text
             className={cn(
-              'text-lg font-semibold group-hover:text-teal-500 group-focus:text-teal-500 leading-none transition-colors duration-200',
+              'text-lg font-semibold group-hover:text-teal-500 group-focus:text-teal-500 leading-none transition-colors duration-200 animate-fadeIn',
               isActive ? 'text-teal-500' : 'text-gray-300'
             )}
           >

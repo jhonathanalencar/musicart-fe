@@ -11,8 +11,8 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'py-2 fixed top-0 left-0 h-full bg-slate-800/60 backdrop-blur drop-shadow-md',
-        isSidebarOpen ? 'w-60' : 'w-fit'
+        'py-2 fixed top-0 left-0 h-full bg-slate-800/60 backdrop-blur drop-shadow-md transition-width duration-200',
+        isSidebarOpen ? 'w-60' : 'w-20'
       )}
     >
       <button
@@ -30,7 +30,7 @@ export function Sidebar() {
         )}
       </button>
 
-      <nav id="main-navigation" className="pt-16 transition-all duration-200">
+      <nav id="main-navigation" className="pt-16">
         <ul aria-label="main" className="flex flex-col gap-3">
           <SidebarLink
             icon={<House weight="bold" />}

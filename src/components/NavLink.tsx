@@ -24,10 +24,11 @@ function NavLinkLink({ children, ...rest }: NavLinkLinkProps) {
 
 interface NavLinkIconProps {
   icon: JSX.Element;
+  className?: string;
 }
 
-function NavLinkIcon({ icon }: NavLinkIconProps) {
-  return cloneElement(icon);
+function NavLinkIcon({ icon, className }: NavLinkIconProps) {
+  return cloneElement(icon, { className });
 }
 
 interface NavLinkTextProps extends HTMLAttributes<HTMLSpanElement> {

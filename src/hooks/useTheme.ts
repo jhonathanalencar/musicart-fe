@@ -27,7 +27,8 @@ export function useTheme() {
     'system'
   );
 
-  const isDarkMode = theme === 'dark' || isDarkModePreference;
+  const isDarkMode =
+    theme === 'dark' || (theme === 'system' && isDarkModePreference);
 
   function toggleTheme() {
     if (!(LOCAL_STORAGE_KEY in localStorage)) {

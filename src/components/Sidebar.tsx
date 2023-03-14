@@ -2,19 +2,18 @@ import { useState } from 'react';
 import { CaretLeft, CaretRight } from 'phosphor-react';
 
 import { cn } from '../utils/classNames';
-import { useTheme } from '../hooks/useTheme';
 import { sidebarLinksData } from '../constants/data';
 
 import { SidebarLink } from './SidebarLink';
+import { ThemeSwitch } from './ThemeSwitch';
 
 export function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const { toggleTheme } = useTheme();
 
   return (
     <aside
       className={cn(
-        'py-2 fixed top-0 left-0 h-full bg-slate-200/60 dark:bg-slate-800/60 backdrop-blur drop-shadow-md duration-500',
+        'pt-2 pb-6 fixed top-0 left-0 h-full flex flex-col items-start bg-slate-200/60 dark:bg-slate-800/60 backdrop-blur drop-shadow-md duration-500',
         isSidebarOpen ? 'w-60' : 'w-20'
       )}
     >
@@ -53,7 +52,8 @@ export function Sidebar() {
           })}
         </ul>
       </nav>
-      <button onClick={toggleTheme}>toggle</button>
+
+      <ThemeSwitch isSidebarOpen={isSidebarOpen} />
     </aside>
   );
 }

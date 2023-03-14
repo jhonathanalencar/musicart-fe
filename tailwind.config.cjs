@@ -4,6 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   content: ['./index.html', './src/**/*.tsx'],
+  darkMode: 'class',
   theme: {
     extend: {
       transitionProperty: {

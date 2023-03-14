@@ -7,11 +7,6 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
-      transitionProperty: {
-        ...defaultTheme.transitionProperty,
-        width: 'width',
-        height: 'height',
-      },
       animation: {
         fadeIn: 'fadeIn 0.75s ease-in-out',
       },

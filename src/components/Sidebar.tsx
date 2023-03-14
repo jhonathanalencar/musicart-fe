@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { House, Planet, Playlist, CaretLeft, CaretRight } from 'phosphor-react';
+import { CaretLeft, CaretRight } from 'phosphor-react';
 
 import { cn } from '../utils/classNames';
 import { useTheme } from '../hooks/useTheme';
+import { sidebarLinksData } from '../constants/data';
 
 import { SidebarLink } from './SidebarLink';
 
@@ -13,7 +14,7 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'py-2 fixed top-0 left-0 h-full bg-slate-200/60 dark:bg-slate-800/60 backdrop-blur drop-shadow-md transition-width duration-200',
+        'py-2 fixed top-0 left-0 h-full bg-slate-200/60 dark:bg-slate-800/60 backdrop-blur drop-shadow-md duration-500',
         isSidebarOpen ? 'w-60' : 'w-20'
       )}
     >
@@ -38,23 +39,18 @@ export function Sidebar() {
         )}
       </button>
 
-      <nav id="main-navigation" className="pt-16">
-        <ul aria-label="main" className="flex flex-col gap-3">
-          <SidebarLink
-            icon={<House weight="bold" />}
-            text="Home"
-            isSidebarOpen={isSidebarOpen}
-          />
-          <SidebarLink
-            icon={<Planet weight="bold" />}
-            text="Explore"
-            isSidebarOpen={isSidebarOpen}
-          />
-          <SidebarLink
-            icon={<Playlist weight="bold" />}
-            text="Genres"
-            isSidebarOpen={isSidebarOpen}
-          />
+      <nav id="main-navigation" className="pt-16 w-full">
+        <ul aria-label="main" className="flex flex-col gap-3 w-full">
+          {sidebarLinksData.map((link, index) => {
+            return (
+              <SidebarLink
+                key={`${index}-${link.text}`}
+                icon={link.icon}
+                text={link.text}
+                isSidebarOpen={isSidebarOpen}
+              />
+            );
+          })}
         </ul>
       </nav>
       <button onClick={toggleTheme}>toggle</button>

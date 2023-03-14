@@ -28,24 +28,23 @@ export function SidebarLink({ icon, text, isSidebarOpen }: SidebarLinkProps) {
         <NavLink.Icon
           icon={icon}
           className={cn(
-            'h-6 w-6 group-hover:text-yellow-500 dark:group-hover:text-teal-500 group-focus:text-yellow-500 dark:group-focus:text-teal-500 transition-colors duration-200',
+            'h-6 w-6 shrink-0 group-hover:text-yellow-500 dark:group-hover:text-teal-500 group-focus:text-yellow-500 dark:group-focus:text-teal-500 transition-colors duration-200',
             isActive
               ? 'text-yellow-500 dark:text-teal-500'
               : 'text-gray-400 dark:text-gray-300'
           )}
         />
-        {isSidebarOpen ? (
-          <NavLink.Text
-            className={cn(
-              'text-lg font-semibold group-hover:text-yellow-500 dark:group-hover:text-teal-500 group-focus:text-yellow-500 dark:group-focus:text-teal-500 leading-none transition-colors duration-200 animate-fadeIn',
-              isActive
-                ? 'text-yellow-500 dark:text-teal-500'
-                : 'text-gray-400 dark:text-gray-300'
-            )}
-          >
-            {text}
-          </NavLink.Text>
-        ) : null}
+        <NavLink.Text
+          className={cn(
+            'text-lg font-semibold group-hover:text-yellow-500 dark:group-hover:text-teal-500 group-focus:text-yellow-500 dark:group-focus:text-teal-500 leading-none duration-500',
+            isActive
+              ? 'text-yellow-500 dark:text-teal-500'
+              : 'text-gray-400 dark:text-gray-300',
+            isSidebarOpen ? '' : 'opacity-0 translate-x-8 overflow-hidden'
+          )}
+        >
+          {text}
+        </NavLink.Text>
       </NavLink.Link>
     </NavLink.Root>
   );

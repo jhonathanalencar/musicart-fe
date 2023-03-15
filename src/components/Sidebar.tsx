@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { CaretLeft, CaretRight } from 'phosphor-react';
 
 import { cn } from '../utils/classNames';
-import { sidebarLinksData } from '../constants/data';
 import logo from '../assets/musicart-logo.png';
 
-import { SidebarLink } from './SidebarLink';
 import { ThemeSwitch } from './ThemeSwitch';
+import { Navbar } from './Navbar';
 
 export function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -15,10 +14,10 @@ export function Sidebar() {
     <aside
       className={cn(
         'relative pt-2 pb-6 h-full flex flex-col z-10 items-start bg-slate-200 dark:bg-black backdrop-blur drop-shadow-lg duration-500',
-        isSidebarOpen ? 'w-60' : 'w-20'
+        isSidebarOpen ? 'w-64' : 'w-20'
       )}
     >
-      <div className="h-16 w-16 mt-2 mb-4 mx-auto ">
+      <div className="h-16 w-16 mt-2 mb-4 mx-auto">
         <img
           src={logo}
           alt="Musicart Logo"
@@ -47,22 +46,13 @@ export function Sidebar() {
         )}
       </button>
 
-      <nav id="main-navigation" className="w-full mt-16">
-        <ul aria-label="main" className="flex flex-col gap-3 w-full">
-          {sidebarLinksData.map((link, index) => {
-            return (
-              <SidebarLink
-                key={`${index}-${link.text}`}
-                icon={link.icon}
-                text={link.text}
-                isSidebarOpen={isSidebarOpen}
-              />
-            );
-          })}
-        </ul>
-      </nav>
+      <div className="w-full mt-16">
+        <Navbar isSidebarOpen={isSidebarOpen} />
+      </div>
 
-      <ThemeSwitch isSidebarOpen={isSidebarOpen} />
+      <div className="w-full mt-auto">
+        <ThemeSwitch isSidebarOpen={isSidebarOpen} />
+      </div>
     </aside>
   );
 }

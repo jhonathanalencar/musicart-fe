@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { List } from 'phosphor-react';
+import { CaretLeft, CaretRight } from 'phosphor-react';
 
 import { cn } from '../utils/classNames';
 import { sidebarLinksData } from '../constants/data';
@@ -14,25 +14,11 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'pt-2 pb-6 fixed top-0 left-0 h-full flex flex-col items-start bg-slate-200/60 dark:bg-slate-800/60 backdrop-blur drop-shadow-lg duration-500',
+        'relative pt-2 pb-6 h-full flex flex-col z-10 items-start bg-slate-200 dark:bg-black backdrop-blur drop-shadow-lg duration-500',
         isSidebarOpen ? 'w-60' : 'w-20'
       )}
     >
-      <button
-        type="button"
-        onClick={() => setIsSidebarOpen((prev) => !prev)}
-        aria-label={isSidebarOpen ? 'Close Menu' : 'Open Menu'}
-        aria-controls="main-navigation"
-        aria-expanded={isSidebarOpen}
-        className="self-end mr-2 mt-2 rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-300 dark:focus:ring-offset-slate-800 group"
-      >
-        <List
-          weight="bold"
-          className="h-8 w-8 text-slate-900 dark:text-violet-500 hover:text-yellow-500 dark:hover:text-teal-500 group-focus:text-yellow-500 dark:group-focus:text-teal-500 transition-colors duration-200"
-        />
-      </button>
-
-      <div className="h-16 w-16 mt-8 mb-16 mx-auto ">
+      <div className="h-16 w-16 mt-2 mb-4 mx-auto ">
         <img
           src={logo}
           alt="Musicart Logo"
@@ -40,7 +26,28 @@ export function Sidebar() {
         />
       </div>
 
-      <nav id="main-navigation" className="w-full">
+      <button
+        type="button"
+        onClick={() => setIsSidebarOpen((prev) => !prev)}
+        aria-label={isSidebarOpen ? 'Close Menu' : 'Open Menu'}
+        aria-controls="main-navigation"
+        aria-expanded={isSidebarOpen}
+        className="absolute right-0 top-24 translate-x-1/2 p-2 bg-violet-500 rounded-full cursor-pointer  hover:bg-violet-600 focus:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-300 dark:focus:ring-offset-slate-800 transition-colors duration-200"
+      >
+        {isSidebarOpen ? (
+          <CaretLeft
+            weight="bold"
+            className="h-6 w-6 text-slate-100 dark:text-slate-900"
+          />
+        ) : (
+          <CaretRight
+            weight="bold"
+            className="h-6 w-6 text-slate-100 dark:text-slate-900"
+          />
+        )}
+      </button>
+
+      <nav id="main-navigation" className="w-full mt-16">
         <ul aria-label="main" className="flex flex-col gap-3 w-full">
           {sidebarLinksData.map((link, index) => {
             return (

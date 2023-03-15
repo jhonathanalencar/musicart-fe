@@ -15,11 +15,11 @@ export function ThemeSwitch({ isSidebarOpen }: ThemeSwitchProps) {
       <div className="w-full pl-2 py-1 flex items-center gap-3 overflow-hidden">
         <Switch.Root
           id="dark-mode"
-          className="py-1 shrink-0 bg-slate-800 w-16 rounded-full relative data-[state=checked]:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-violet-600 focus:ring-offset-2 focus:ring-offset-slate-200 dark:focus:ring-offset-slate-800 duration-200"
+          className="py-1 shrink-0 bg-slate-800 w-16 rounded-full relative data-[state=checked]:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-violet-900 dark:focus:ring-violet-600 focus:ring-offset-2 focus:ring-offset-slate-200 dark:focus:ring-offset-slate-800 duration-200"
           checked={isDarkMode ? true : false}
           onCheckedChange={toggleTheme}
         >
-          <Switch.Thumb className="bg-red-600 dark:bg-violet-600 w-6 h-6 block rounded-full transition-transform translate-x-2 data-[state=checked]:translate-x-8 duration-100" />
+          <Switch.Thumb className="bg-violet-600 dark:bg-violet-600 w-6 h-6 block rounded-full transition-transform translate-x-2 data-[state=checked]:translate-x-8 duration-100" />
         </Switch.Root>
 
         <label

@@ -14,7 +14,7 @@ const iconStyles =
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const isBelowMediumScreens = useMediaQuery('(max-width: 50em)');
+  const isBelowMediumScreens = useMediaQuery('(max-width: 49.99em)');
 
   useEffect(() => {
     function handleCloseSidebarOnPressEscape(e: KeyboardEvent) {

@@ -7,13 +7,25 @@ export function Home() {
   const [countryCode, setCountryCode] = useState('JP');
 
   useEffect(() => {
-    async function getUserLocation() {
-      const result = await axios.get('https://ipapi.co/json');
+    const controller = new AbortController();
 
-      setCountryCode(result.data.country_code as string);
+    async function getUserLocation() {
+      try {
+        const response = await axios.get('https://ipapi.co/json', {
+          signal: controller.signal,
+        });
+
+        setCountryCode(response.data.country_code as string);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     getUserLocation();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   const { data } = useGetChartsQuery(countryCode);

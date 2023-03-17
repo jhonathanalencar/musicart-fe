@@ -2,6 +2,7 @@ import { useMediaQuery } from './hooks/useMediaQuery';
 
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
+import { Home } from './pages/Home';
 
 export function App() {
   const isAboveMediumScreens = useMediaQuery('(min-width: 50em)');
@@ -12,6 +13,7 @@ export function App() {
 
       <main className="h-full w-full">
         <Header />
+        <Home />
       </main>
     </div>
   );

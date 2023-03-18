@@ -1,12 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 
-const defaultTheme = require('tailwindcss/defaultTheme');
-
 module.exports = {
   content: ['./index.html', './src/**/*.tsx'],
   darkMode: 'class',
   theme: {
     extend: {
+      gridTemplateColumns: {
+        layout: 'repeat(auto-fit, minmax(250px, 1fr))',
+      },
       animation: {
         fadeIn: 'fadeIn 0.75s ease-in-out',
       },

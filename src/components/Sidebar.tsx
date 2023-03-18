@@ -31,7 +31,7 @@ export function Sidebar() {
         aria-label={isSidebarOpen ? 'Close Menu' : 'Open Menu'}
         aria-controls="main-navigation"
         aria-expanded={isSidebarOpen}
-        className="absolute right-0 top-24 translate-x-1/2 p-2 bg-violet-500 rounded-full cursor-pointer  hover:bg-violet-600 focus:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-300 dark:focus:ring-offset-slate-800 transition-colors duration-200"
+        className="absolute right-0 top-28 translate-x-1/2 p-2 bg-violet-500 rounded-full cursor-pointer  hover:bg-violet-600 focus:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-300 dark:focus:ring-offset-slate-800 transition-colors duration-200"
       >
         {isSidebarOpen ? (
           <CaretLeft

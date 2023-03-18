@@ -31,7 +31,7 @@ export function Header() {
   }, [isOpen]);
 
   return (
-    <header className="w-full h-24 px-4 bg-slate-200/60 dark:bg-[#121214]/60 backdrop-blur-sm drop-shadow-md">
+    <header className="relative z-[1] h-24 px-4 bg-slate-200 dark:bg-[#121214] drop-shadow-md">
       <div className="w-full h-full max-w-[1400px] mx-auto flex items-center justify-between">
         {isBelowMediumScreens ? (
           <button
@@ -46,7 +46,7 @@ export function Header() {
         ) : null}
 
         {isOpen && isBelowMediumScreens ? (
-          <div className="fixed top-0 left-0 flex w-full h-screen">
+          <div className="absolute top-0 left-0 right-0 flex w-full h-screen">
             <div className="bg-slate-200 dark:bg-slate-800 w-64 flex flex-col gap-8">
               <button
                 onClick={() => setIsOpen(false)}

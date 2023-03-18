@@ -11,7 +11,7 @@ export function App() {
     <div className="h-full w-full flex bg-slate-300 dark:bg-slate-900 duration-500">
       {isAboveMediumScreens ? <Sidebar /> : null}
 
-      <main className="h-full w-full">
+      <main className="h-full w-full overflow-hidden hide-scrollbar">
         <Header />
         <Home />
       </main>

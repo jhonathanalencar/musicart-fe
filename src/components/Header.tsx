@@ -31,7 +31,7 @@ export function Header() {
   }, [isOpen]);
 
   return (
-    <header className="relative z-[1] h-24 px-4 bg-slate-200 dark:bg-[#121214] drop-shadow-md">
+    <header className="relative top-0 left-0 h-24 px-4 bg-slate-200 dark:bg-[#121214] drop-shadow-md">
       <div className="w-full h-full max-w-[1400px] mx-auto flex items-center justify-between">
         {isBelowMediumScreens ? (
           <button

@@ -10,11 +10,16 @@ module.exports = {
       },
       animation: {
         fadeIn: 'fadeIn 0.75s ease-in-out',
+        slideDown: 'slideDown 1s ease-in-out',
       },
       keyframes: {
         fadeIn: {
-          '0%': { opacity: 0 },
-          '100%': { opacity: 1 },
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
+        slideDown: {
+          from: { opacity: 0, transform: 'translateY(-25%)' },
+          to: { opacity: 1, transform: 'none' },
         },
       },
     },

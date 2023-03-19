@@ -24,7 +24,7 @@ export function SongCard({ track }: SongCardProps) {
       tabIndex={0}
       onClick={() => play()}
       onKeyDown={(event) => handleKeyDown(event)}
-      className="group p-3 rounded flex flex-col gap-1 bg-violet-400 dark:bg-zinc-800 drop-shadow-sm cursor-pointer hover:bg-violet-500 dark:hover:bg-zinc-700 focus:bg-violet-500 focus-within:bg-violet-500 dark:focus:bg-zinc-700 dark:focus-within:bg-zinc-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-300 dark:focus:ring-offset-slate-900"
+      className="group p-3 rounded flex flex-col gap-1 animate-slideDown bg-violet-400 dark:bg-zinc-800 drop-shadow-sm cursor-pointer hover:bg-violet-500 dark:hover:bg-zinc-700 focus:bg-violet-500 focus-within:bg-violet-500 dark:focus:bg-zinc-700 dark:focus-within:bg-zinc-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-300 dark:focus:ring-offset-slate-900"
     >
       <div className="w-full relative">
         <img

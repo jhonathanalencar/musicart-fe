@@ -1,4 +1,3 @@
-import { ChangeEvent, useRef, useState } from 'react';
 import {
   FastForward,
   Pause,
@@ -9,88 +8,30 @@ import {
 } from 'phosphor-react';
 
 import { formatHumanReadTime, formatTime } from '../utils/formatter';
+import { useAudioPlayer } from '../hooks/useAudioPlayer';
 
 const url =
   'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/4f/d1/6e/4fd16e9e-aee3-f565-f7ac-d374959bed75/mzaf_13334718501163194135.plus.aac.ep.m4a';
 
 export function AudioPlayer() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
-  const [duration, setDuration] = useState(0);
-  const [mediaTime, setMediaTime] = useState(0);
-  const [volume, setVolume] = useState(0.2);
-
-  const audioRef = useRef<HTMLAudioElement>(null);
-
-  function togglePlaying() {
-    setIsPlaying((prev) => !prev);
-    isPlaying ? audioRef.current?.pause() : audioRef.current?.play();
-  }
-
-  function onLoadedMetadata() {
-    if (!audioRef.current) return;
-
-    setDuration(audioRef.current.duration);
-    audioRef.current.volume = volume;
-  }
-
-  function onTimeUpdate() {
-    if (!audioRef.current) return;
-
-    setMediaTime(audioRef.current.currentTime);
-  }
-
-  function onScrubberChange(event: ChangeEvent<HTMLInputElement>) {
-    if (!audioRef.current) return;
-
-    const newTime = Number(event.target.value);
-    setMediaTime(newTime);
-    audioRef.current.currentTime = newTime;
-  }
-
-  function onRewind() {
-    if (!audioRef.current) return;
-
-    const { currentTime } = audioRef.current;
-    const newTime = Math.max(currentTime - 15, 0);
-    setMediaTime(newTime);
-    audioRef.current.currentTime = newTime;
-  }
-
-  function onFastForward() {
-    if (!audioRef.current) return;
-
-    const { currentTime } = audioRef.current;
-    const newTime = Math.min(currentTime + 15, duration);
-    setMediaTime(newTime);
-    audioRef.current.currentTime = newTime;
-  }
-
-  function toggleMute() {
-    if (!audioRef.current) return;
-
-    setIsMuted((prev) => !prev);
-    audioRef.current.muted = !isMuted;
-  }
-
-  function onVolumeChange() {
-    if (!audioRef.current) return;
-
-    if (audioRef.current.muted || audioRef.current.volume === 0) {
-      setIsMuted(true);
-    } else if (!audioRef.current.muted) {
-      setIsMuted(false);
-      setVolume(audioRef.current.volume);
-    }
-  }
-
-  function onVolumeScrubberChange(event: ChangeEvent<HTMLInputElement>) {
-    if (!audioRef.current) return;
-
-    const newVolume = Number(event.target.value);
-    setVolume(newVolume);
-    audioRef.current.volume = newVolume;
-  }
+  const {
+    audioRef,
+    isPlaying,
+    isMuted,
+    mediaTime,
+    duration,
+    volume,
+    togglePlaying,
+    setIsPlaying,
+    onLoadedMetadata,
+    onTimeUpdate,
+    onScrubberChange,
+    onRewind,
+    onFastForward,
+    toggleMute,
+    onVolumeChange,
+    onVolumeScrubberChange,
+  } = useAudioPlayer();
 
   return (
     <div className="absolute z-[8] bottom-0 left-0 w-full h-32 bg-gray-900/60 backdrop-blur-sm">

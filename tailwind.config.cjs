@@ -5,6 +5,14 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      colors: {
+        gray: {
+          600: '#282828',
+          700: '#181818',
+          800: '#121214',
+          900: '#090909',
+        },
+      },
       gridTemplateColumns: {
         layout: 'repeat(auto-fit, minmax(250px, 1fr))',
       },

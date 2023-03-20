@@ -24,7 +24,7 @@ export function SongCard({ track }: SongCardProps) {
       tabIndex={0}
       onClick={() => play()}
       onKeyDown={(event) => handleKeyDown(event)}
-      className="group p-3 rounded flex flex-col gap-1 animate-slideDown bg-violet-400 dark:bg-zinc-800 drop-shadow-sm cursor-pointer hover:bg-violet-500 dark:hover:bg-zinc-700 focus:bg-violet-500 focus-within:bg-violet-500 dark:focus:bg-zinc-700 dark:focus-within:bg-zinc-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-300 dark:focus:ring-offset-slate-900"
+      className="group p-3 rounded flex flex-col gap-1 animate-slideDown bg-violet-400 dark:bg-gray-700 drop-shadow-sm cursor-pointer hover:bg-violet-500 dark:hover:bg-gray-600 focus:bg-violet-500 focus-within:bg-violet-500 dark:focus:bg-gray-600 dark:focus-within:bg-gray-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-300 dark:focus:ring-offset-gray-800"
     >
       <div className="w-full relative">
         <img
@@ -45,14 +45,14 @@ export function SongCard({ track }: SongCardProps) {
 
       <a
         href="/"
-        className="text-lg text-slate-800 dark:text-slate-200 font-bold leading-tight focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-zinc-700 focus-visible:ring-2 focus-visible:ring-offset-2 hover:underline"
+        className="text-lg text-slate-800 dark:text-slate-200 font-bold leading-tight focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-gray-600 focus-visible:ring-2 focus-visible:ring-offset-2 hover:underline"
       >
         {track.title}
       </a>
 
       <a
         href="/"
-        className="text-slate-700 dark:text-slate-400 font-bold leading-tight focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-zinc-700 focus-visible:ring-2 focus-visible:ring-offset-2 hover:underline"
+        className="text-slate-700 dark:text-slate-400 font-bold leading-tight focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-gray-600 focus-visible:ring-2 focus-visible:ring-offset-2 hover:underline"
       >
         {track.subtitle}
       </a>

@@ -13,13 +13,13 @@ export function Home() {
   }
 
   return (
-    <section className="h-full w-full">
-      <div className="h-full w-full max-w-[1400px] mx-auto px-4 overflow-auto hide-scrollbar">
+    <section className="h-full w-full overflow-auto hide-scrollbar">
+      <div className="h-full w-full max-w-[1400px] mx-auto px-4">
         <h1 className="text-2xl text-slate-300 font-bold mt-6">
           Top Songs - {countryName}
         </h1>
 
-        <div className="grid grid-cols-layout gap-4 mt-12 mb-40">
+        <div className="grid grid-cols-layout gap-4 mt-12 pb-56">
           {data?.tracks.map((track) => {
             return <SongCard key={track.key} track={track} />;
           })}

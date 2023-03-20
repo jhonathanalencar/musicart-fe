@@ -13,7 +13,7 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        'relative pt-2 pb-6 h-full flex flex-col z-10 items-start bg-slate-200 dark:bg-black backdrop-blur drop-shadow-lg duration-500',
+        'relative pt-2 pb-6 h-screen flex flex-col z-10 items-start bg-slate-200 dark:bg-black backdrop-blur drop-shadow-lg duration-500',
         isSidebarOpen ? 'w-64' : 'w-20'
       )}
     >

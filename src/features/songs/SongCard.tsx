@@ -15,7 +15,7 @@ export function SongCard({ track }: SongCardProps) {
     }
   }
 
-  const soundPreview = track.hub.actions[1].uri;
+  const soundPreview = track.hub.actions?.[1].uri;
   const [play] = useSound(soundPreview ? soundPreview : '');
 
   return (

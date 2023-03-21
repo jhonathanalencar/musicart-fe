@@ -19,7 +19,7 @@ export function Home() {
           Top Songs - {countryName}
         </h1>
 
-        <div className="grid grid-cols-layout gap-4 mt-12 pb-56">
+        <div className="grid grid-cols-layout gap-4 mt-12 pb-40">
           {data?.tracks.map((track) => {
             return <SongCard key={track.key} track={track} />;
           })}

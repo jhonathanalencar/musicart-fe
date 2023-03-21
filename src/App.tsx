@@ -12,10 +12,12 @@ export function App() {
     <div className=" w-full flex bg-slate-300 dark:bg-gray-800 duration-500">
       {isAboveMediumScreens ? <Sidebar /> : null}
 
-      <main className="relative h-screen  w-full overflow-hidden">
-        <AudioPlayer />
-        <Header />
-        <Home />
+      <main className="relative h-screen w-full overflow-hidden">
+        <div className="relative h-full w-full flex flex-col">
+          <AudioPlayer />
+          <Header />
+          <Home />
+        </div>
       </main>
     </div>
   );

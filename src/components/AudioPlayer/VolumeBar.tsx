@@ -1,6 +1,9 @@
 import { ChangeEvent } from 'react';
 import { SpeakerHigh, SpeakerX } from 'phosphor-react';
 
+import { useMediaQuery } from '../../hooks/useMediaQuery';
+import { cn } from '../../utils/classNames';
+
 interface VolumeBarProps {
   isMuted: boolean;
   volume: number;
@@ -14,6 +17,8 @@ export function VolumeBar({
   toggleMute,
   onVolumeScrubberChange,
 }: VolumeBarProps) {
+  const isAboveMediumScreens = useMediaQuery('(min-width: 50em)');
+
   return (
     <div className="flex flex-1 justify-center gap-2">
       <button onClick={toggleMute}>
@@ -49,7 +54,7 @@ export function VolumeBar({
         max={1}
         step={0.1}
         onChange={onVolumeScrubberChange}
-        className="accent-violet-500"
+        className={cn('accent-violet-500', isAboveMediumScreens ? '' : 'w-24')}
       />
     </div>
   );

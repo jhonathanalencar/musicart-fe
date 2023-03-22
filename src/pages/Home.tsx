@@ -18,7 +18,9 @@ export function Home() {
         </h1>
 
         <div className="grid grid-cols-layout gap-4 mt-12 pb-40">
-          {data.items?.map((item, index) => {
+          {data.items.map((item, index) => {
+            if (!item.track.preview_url) return null;
+
             return (
               <SongCard
                 key={`${item.track?.id}-${index}`}

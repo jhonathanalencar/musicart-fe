@@ -1,6 +1,7 @@
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { cn } from '../../utils/classNames';
+import { Song } from '../../features/player/playerSlice';
 
 import { VolumeBar } from './VolumeBar';
 import { SeekBar } from './SeekBar';
@@ -11,10 +12,10 @@ import { Card } from './Card';
 //   'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/4f/d1/6e/4fd16e9e-aee3-f565-f7ac-d374959bed75/mzaf_13334718501163194135.plus.aac.ep.m4a';
 
 interface AudioPlayerProps {
-  url: string;
+  song: Song;
 }
 
-export function AudioPlayer({ url }: AudioPlayerProps) {
+export function AudioPlayer({ song }: AudioPlayerProps) {
   const {
     audioRef,
     isPlaying,
@@ -46,12 +47,22 @@ export function AudioPlayer({ url }: AudioPlayerProps) {
       )}
     >
       <div className="h-full flex items-center justify-between p-3">
-        {isAboveMediumScreens ? <Card /> : null}
+        {isAboveMediumScreens ? (
+          <Card
+            coverart={song.coverart}
+            title={song.title}
+            subtitle={song.subtitle}
+          />
+        ) : null}
 
         <div className="flex-1 justify-center flex flex-col gap-3">
           {!isAboveMediumScreens ? (
             <div className="flex justify-between">
-              <Card />
+              <Card
+                coverart={song.coverart}
+                title={song.title}
+                subtitle={song.subtitle}
+              />
 
               <div className="flex">
                 <VolumeBar
@@ -96,7 +107,7 @@ export function AudioPlayer({ url }: AudioPlayerProps) {
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           onVolumeChange={onVolumeChange}
-          src={url}
+          src={song.url}
         >
           <track kind="captions" />
         </audio>

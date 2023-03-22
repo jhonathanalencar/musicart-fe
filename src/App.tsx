@@ -17,7 +17,7 @@ export function App() {
 
       <main className="relative h-screen w-full overflow-hidden">
         <div className="relative h-full w-full flex flex-col">
-          {activeSong.url ? <AudioPlayer url={activeSong.url} /> : null}
+          {activeSong.url ? <AudioPlayer song={activeSong} /> : null}
           <Header />
           <Home />
         </div>

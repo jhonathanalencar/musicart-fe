@@ -1,4 +1,5 @@
 import { useContextSelector } from 'use-context-selector';
+
 import { PlayerContext } from '../contexts/PlayerContext';
 
 export function useAudioPlayer() {
@@ -16,6 +17,8 @@ export function useAudioPlayer() {
     PlayerContext,
     (context) => context.isMuted
   );
+
+  const isLoop = useContextSelector(PlayerContext, (context) => context.isLoop);
 
   const mediaTime = useContextSelector(
     PlayerContext,
@@ -79,10 +82,16 @@ export function useAudioPlayer() {
     (context) => context.onVolumeScrubberChange
   );
 
+  const toggleLoop = useContextSelector(
+    PlayerContext,
+    (context) => context.toggleLoop
+  );
+
   return {
     audioRef,
     isPlaying,
     isMuted,
+    isLoop,
     mediaTime,
     duration,
     volume,
@@ -96,5 +105,6 @@ export function useAudioPlayer() {
     toggleMute,
     onVolumeChange,
     onVolumeScrubberChange,
+    toggleLoop,
   };
 }

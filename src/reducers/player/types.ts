@@ -1,6 +1,7 @@
 export interface PlayerState {
   isPlaying: boolean;
   isMuted: boolean;
+  isLoop: boolean;
   duration: number;
   mediaTime: number;
   volume: number;
@@ -14,6 +15,7 @@ export enum ActionTypes {
   TOGGLE_MUTE = 'TOGGLE_MUTE',
   MUTE_CHANGE = 'MUTE_CHANGE',
   VOLUME_CHANGE = 'VOLUME_CHANGE',
+  TOGGLE_LOOP = 'TOGGLE_LOOP',
 }
 
 interface TogglePlayingAction {
@@ -69,6 +71,10 @@ interface OnVolumeScrubberChangeAction {
   payload: number;
 }
 
+interface ToggleLoopAction {
+  type: ActionTypes.TOGGLE_LOOP;
+}
+
 export type Action =
   | TogglePlayingAction
   | SetIsPlayingAction
@@ -80,4 +86,5 @@ export type Action =
   | ToggleMuteAction
   | SetIsMutedAction
   | OnVolumeChangeAction
-  | OnVolumeScrubberChangeAction;
+  | OnVolumeScrubberChangeAction
+  | ToggleLoopAction;

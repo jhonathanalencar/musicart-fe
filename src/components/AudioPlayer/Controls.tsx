@@ -1,16 +1,27 @@
-import { FastForward, Pause, Play, Rewind } from 'phosphor-react';
+import {
+  FastForward,
+  Pause,
+  Play,
+  Repeat,
+  RepeatOnce,
+  Rewind,
+} from 'phosphor-react';
 
 interface ControlsProps {
   isPlaying: boolean;
+  isLoop: boolean;
   onRewind: () => void;
   togglePlaying: () => void;
+  toggleLoop: () => void;
   onFastForward: () => void;
 }
 
 export function Controls({
   isPlaying,
+  isLoop,
   onRewind,
   togglePlaying,
+  toggleLoop,
   onFastForward,
 }: ControlsProps) {
   return (
@@ -55,6 +66,13 @@ export function Controls({
           className="w-6 h-6 md:w-8 md:h-8 text-slate-100"
         />
         <span className="text-slate-300 font-semibold text-lg">15</span>
+      </button>
+      <button aria-label="Repeat" onClick={toggleLoop}>
+        {isLoop ? (
+          <RepeatOnce className="w-6 h-6 md:w-8 md:h-8 text-violet-500" />
+        ) : (
+          <Repeat className="w-6 h-6 md:w-8 md:h-8 text-slate-100" />
+        )}
       </button>
     </div>
   );

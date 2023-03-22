@@ -11,6 +11,7 @@ import {
   onVolumeScrubberChangeAction,
   setIsMutedAction,
   setIsPlayingAction,
+  toggleLoopAction,
   toggleMuteAction,
   togglePlayingAction,
 } from '../reducers/player/actions';
@@ -21,6 +22,7 @@ interface PlayerContextData {
   audioRef: React.RefObject<HTMLAudioElement>;
   isPlaying: boolean;
   isMuted: boolean;
+  isLoop: boolean;
   duration: number;
   mediaTime: number;
   volume: number;
@@ -34,6 +36,7 @@ interface PlayerContextData {
   toggleMute: () => void;
   onVolumeChange: () => void;
   onVolumeScrubberChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  toggleLoop: () => void;
 }
 
 interface PlayerContextProviderProps {
@@ -45,6 +48,7 @@ export const PlayerContext = createContext({} as PlayerContextData);
 const initialState: PlayerState = {
   isPlaying: false,
   isMuted: false,
+  isLoop: false,
   duration: 0,
   mediaTime: 0,
   volume: 0.2,
@@ -57,7 +61,8 @@ export function PlayerContextProvider({
 }: PlayerContextProviderProps) {
   const [playerState, dispatch] = useReducer(playerReducer, initialState);
 
-  const { isPlaying, isMuted, mediaTime, duration, volume } = playerState;
+  const { isPlaying, isMuted, isLoop, mediaTime, duration, volume } =
+    playerState;
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -155,12 +160,21 @@ export function PlayerContextProvider({
     []
   );
 
+  const toggleLoop = useCallback(() => {
+    if (!audioRef.current) return;
+
+    dispatch(toggleLoopAction());
+
+    audioRef.current.loop = !isLoop;
+  }, [isLoop]);
+
   return (
     <PlayerContext.Provider
       value={{
         audioRef,
         isPlaying,
         isMuted,
+        isLoop,
         mediaTime,
         duration,
         volume,
@@ -174,6 +188,7 @@ export function PlayerContextProvider({
         toggleMute,
         onVolumeChange,
         onVolumeScrubberChange,
+        toggleLoop,
       }}
     >
       {children}

@@ -48,9 +48,9 @@ export function SongCard({ track, songIndex }: SongCardProps) {
   const soundPreview = track.preview_url;
 
   const song: Song = {
-    coverart: track.album.images[0].url,
+    coverart: track.album?.images?.[0].url,
     id: track.id,
-    subtitle: track.album.artists[0].name,
+    subtitle: track.album?.artists[0].name,
     title: track.name,
     url: soundPreview || '',
   };
@@ -86,7 +86,7 @@ export function SongCard({ track, songIndex }: SongCardProps) {
     >
       <div className="w-full relative">
         <img
-          src={track.album.images[0].url}
+          src={track.album?.images?.[0].url}
           alt={track.name}
           className="object-cover w-full rounded"
         />
@@ -125,7 +125,7 @@ export function SongCard({ track, songIndex }: SongCardProps) {
         href="/"
         className="text-slate-700 dark:text-slate-400 font-bold leading-tight focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-gray-600 focus-visible:ring-2 focus-visible:ring-offset-2 hover:underline"
       >
-        {track.album.artists[0].name}
+        {track.album?.artists?.[0].name}
       </a>
     </div>
   );

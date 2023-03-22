@@ -19,6 +19,7 @@ export function AudioPlayer({ url }: AudioPlayerProps) {
     audioRef,
     isPlaying,
     isMuted,
+    isLoop,
     mediaTime,
     duration,
     volume,
@@ -32,6 +33,7 @@ export function AudioPlayer({ url }: AudioPlayerProps) {
     toggleMute,
     onVolumeChange,
     onVolumeScrubberChange,
+    toggleLoop,
   } = useAudioPlayer();
 
   const isAboveMediumScreens = useMediaQuery('(min-width: 50em)');
@@ -64,7 +66,9 @@ export function AudioPlayer({ url }: AudioPlayerProps) {
 
           <Controls
             isPlaying={isPlaying}
+            isLoop={isLoop}
             togglePlaying={togglePlaying}
+            toggleLoop={toggleLoop}
             onFastForward={onFastForward}
             onRewind={onRewind}
           />

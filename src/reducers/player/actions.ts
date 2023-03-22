@@ -104,3 +104,11 @@ export function onVolumeScrubberChangeAction(volume: number): {
     payload: volume,
   };
 }
+
+export function toggleLoopAction(): {
+  type: ActionTypes.TOGGLE_LOOP;
+} {
+  return {
+    type: ActionTypes.TOGGLE_LOOP,
+  };
+}

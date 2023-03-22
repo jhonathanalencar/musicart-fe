@@ -39,6 +39,11 @@ export function playerReducer(state: PlayerState, action: Action) {
         draft.volume = action.payload;
       });
     }
+    case ActionTypes.TOGGLE_LOOP: {
+      return produce(state, (draft) => {
+        draft.isLoop = !state.isLoop;
+      });
+    }
     default:
       return state;
   }

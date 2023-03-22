@@ -7,10 +7,14 @@ import { SeekBar } from './SeekBar';
 import { Controls } from './Controls';
 import { Card } from './Card';
 
-const url =
-  'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/4f/d1/6e/4fd16e9e-aee3-f565-f7ac-d374959bed75/mzaf_13334718501163194135.plus.aac.ep.m4a';
+// const url =
+//   'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/4f/d1/6e/4fd16e9e-aee3-f565-f7ac-d374959bed75/mzaf_13334718501163194135.plus.aac.ep.m4a';
 
-export function AudioPlayer() {
+interface AudioPlayerProps {
+  url: string;
+}
+
+export function AudioPlayer({ url }: AudioPlayerProps) {
   const {
     audioRef,
     isPlaying,

@@ -3,16 +3,11 @@ import { GetChartsReturn } from './types';
 
 export const songsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getCharts: builder.query<GetChartsReturn, string>({
-      query: (countryCode: string) => ({
-        url: '/charts/track',
+    getCharts: builder.query<GetChartsReturn, void>({
+      query: () => ({
+        url: '/playlist_tracks',
         method: 'GET',
-        params: {
-          locale: 'en-US',
-          listId: `ip-country-chart-${countryCode}`,
-          pageSize: 20,
-          startFrom: 10,
-        },
+        params: { id: '37i9dQZF1DX4Wsb4d7NKfP', offset: '0', limit: '100' },
       }),
     }),
   }),

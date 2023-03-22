@@ -1,12 +1,10 @@
-import { SongCard } from '../features/songs/SongCard';
+import { data } from '../data';
+import { SongCard, TrackType } from '../features/songs/SongCard';
 
-import { useGetChartsQuery } from '../features/songs/songsApiSlice';
 import { useUserLocation } from '../hooks/useUserLocation';
 
 export function Home() {
-  const { countryCode, countryName } = useUserLocation();
-
-  const { data } = useGetChartsQuery(countryCode);
+  const { countryName } = useUserLocation();
 
   if (!data) {
     return <p className="text-lg text-white font-semibold">Loading...</p>;
@@ -20,8 +18,14 @@ export function Home() {
         </h1>
 
         <div className="grid grid-cols-layout gap-4 mt-12 pb-40">
-          {data?.tracks.map((track) => {
-            return <SongCard key={track.key} track={track} />;
+          {data.items?.map((item, index) => {
+            return (
+              <SongCard
+                key={`${item.track?.id}-${index}`}
+                track={item.track as TrackType}
+                songIndex={index}
+              />
+            );
           })}
         </div>
       </div>

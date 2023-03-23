@@ -1,18 +1,15 @@
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { cn } from '../../utils/classNames';
-import { Song } from '../../features/player/playerSlice';
+import { TrackType } from '../../features/songs/types';
 
 import { VolumeBar } from './VolumeBar';
 import { SeekBar } from './SeekBar';
 import { Controls } from './Controls';
 import { Card } from './Card';
 
-// const url =
-//   'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/4f/d1/6e/4fd16e9e-aee3-f565-f7ac-d374959bed75/mzaf_13334718501163194135.plus.aac.ep.m4a';
-
 interface AudioPlayerProps {
-  song: Song;
+  song: TrackType;
 }
 
 export function AudioPlayer({ song }: AudioPlayerProps) {
@@ -49,9 +46,9 @@ export function AudioPlayer({ song }: AudioPlayerProps) {
       <div className="h-full flex items-center justify-between p-3">
         {isAboveMediumScreens ? (
           <Card
-            coverart={song.coverart}
-            title={song.title}
-            subtitle={song.subtitle}
+            coverart={song.album.images[0].url}
+            title={song.name}
+            subtitle={song.album.artists[0].name}
           />
         ) : null}
 
@@ -59,9 +56,9 @@ export function AudioPlayer({ song }: AudioPlayerProps) {
           {!isAboveMediumScreens ? (
             <div className="flex justify-between">
               <Card
-                coverart={song.coverart}
-                title={song.title}
-                subtitle={song.subtitle}
+                coverart={song.album.images[0].url}
+                title={song.name}
+                subtitle={song.album.artists[0].name}
               />
 
               <div className="flex">
@@ -82,6 +79,7 @@ export function AudioPlayer({ song }: AudioPlayerProps) {
             toggleLoop={toggleLoop}
             onFastForward={onFastForward}
             onRewind={onRewind}
+            setIsPlaying={setIsPlaying}
           />
 
           <SeekBar
@@ -107,7 +105,7 @@ export function AudioPlayer({ song }: AudioPlayerProps) {
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
           onVolumeChange={onVolumeChange}
-          src={song.url}
+          src={song.preview_url}
         >
           <track kind="captions" />
         </audio>

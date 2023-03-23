@@ -2,33 +2,11 @@ import { KeyboardEvent } from 'react';
 import { Pause, Play } from 'phosphor-react';
 import { useDispatch } from 'react-redux';
 
-// import { Track } from './types';
 import { cn } from '../../utils/classNames';
-import { play, Song } from '../player/playerSlice';
+import { selectSong } from '../player/playerSlice';
 import { useAppSelector } from '../../app/store';
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
-
-export type TrackType = {
-  album: {
-    album_group: string;
-    album_type: string;
-    artists: {
-      external_urls: {
-        spotify: string;
-      };
-      id: string;
-      name: string;
-      type: string;
-      uri: string;
-    }[];
-    images: {
-      url: string;
-    }[];
-  };
-  id: string;
-  name: string;
-  preview_url: string;
-};
+import { TrackType } from './types';
 
 interface SongCardProps {
   track: TrackType;
@@ -42,23 +20,14 @@ export function SongCard({ track, songIndex }: SongCardProps) {
     (state) => state.player.activeSongIndex
   );
   const activeSong = useAppSelector((state) => state.player.activeSong);
+
   const { isPlaying, togglePlaying } = useAudioPlayer();
-
-  const soundPreview = track.preview_url;
-
-  const song: Song = {
-    coverart: track.album.images[0].url,
-    id: track.id,
-    subtitle: track.album.artists[0].name,
-    title: track.name,
-    url: soundPreview,
-  };
 
   function handlePlay() {
     if (activeSong.id === track.id) {
       togglePlaying();
     } else {
-      dispatch(play({ song, index: songIndex }));
+      dispatch(selectSong({ song: track, index: songIndex }));
     }
   }
 

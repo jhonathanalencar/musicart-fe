@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import {
   FastForward,
   Pause,
@@ -5,7 +6,11 @@ import {
   Repeat,
   RepeatOnce,
   Rewind,
+  SkipBack,
+  SkipForward,
 } from 'phosphor-react';
+
+import { nextSong, previousSong } from '../../features/player/playerSlice';
 
 interface ControlsProps {
   isPlaying: boolean;
@@ -14,6 +19,7 @@ interface ControlsProps {
   togglePlaying: () => void;
   toggleLoop: () => void;
   onFastForward: () => void;
+  setIsPlaying: (a: boolean) => void;
 }
 
 export function Controls({
@@ -24,6 +30,16 @@ export function Controls({
   toggleLoop,
   onFastForward,
 }: ControlsProps) {
+  const dispatch = useDispatch();
+
+  function handleNextSong() {
+    dispatch(nextSong());
+  }
+
+  function handlePreviousSong() {
+    dispatch(previousSong());
+  }
+
   return (
     <div className="flex justify-center gap-3">
       <button
@@ -37,6 +53,14 @@ export function Controls({
           className="w-6 h-6 md:w-8 md:h-8 text-slate-100"
         />
       </button>
+
+      <button aria-label="Previous Song" onClick={handlePreviousSong}>
+        <SkipBack
+          weight="fill"
+          className="w-6 h-6 md:w-8 md:h-8 text-slate-100"
+        />
+      </button>
+
       <button onClick={togglePlaying} className="bg-slate-100 rounded-full p-1">
         {isPlaying ? (
           <>
@@ -56,6 +80,14 @@ export function Controls({
           </>
         )}
       </button>
+
+      <button aria-label="Next Song" onClick={handleNextSong}>
+        <SkipForward
+          weight="fill"
+          className="w-6 h-6 md:w-8 md:h-8 text-slate-100"
+        />
+      </button>
+
       <button
         aria-label="Fast-Forward 15 seconds"
         onClick={onFastForward}
@@ -67,6 +99,7 @@ export function Controls({
         />
         <span className="text-slate-300 font-semibold text-lg">15</span>
       </button>
+
       <button aria-label="Repeat" onClick={toggleLoop}>
         {isLoop ? (
           <RepeatOnce className="w-6 h-6 md:w-8 md:h-8 text-violet-500" />

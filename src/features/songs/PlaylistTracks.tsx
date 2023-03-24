@@ -4,8 +4,10 @@ import { useParams } from 'react-router-dom';
 
 import { useAppSelector } from '../../app/store';
 import { setCurrentSongs } from '../player/playerSlice';
-import { SongCard } from './SongCard';
 import { useGetPlaylistTracksQuery } from './songsApiSlice';
+
+import { PlaylistHeader } from './PlaylistHeader';
+import { SongCard } from './SongCard';
 
 export function PlaylistTracks() {
   const { id } = useParams();
@@ -36,26 +38,12 @@ export function PlaylistTracks() {
   return (
     <section className="h-full w-full overflow-auto hide-scrollbar">
       <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
-        <header className="mt-6 flex gap-3">
-          <div className="w-56 h-56 rounded-md overflow-hidden shrink-0">
-            <img
-              src={data.images[0].url}
-              alt={data.name}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <h1 className="text-2xl text-slate-700 dark:text-slate-300 font-bold">
-              {data.name}
-            </h1>
-            <p className="text-lg text-slate-500 dark:text-slate-400">
-              {data.description}
-            </p>
-            <span className="text-slate-600 dark:text-slate-300 font-semibold text-lg">
-              {data.tracks.total} songs
-            </span>
-          </div>
-        </header>
+        <PlaylistHeader
+          coverartUrl={data.images[0].url}
+          name={data.name}
+          description={data.description}
+          songsAmount={data.tracks.total}
+        />
 
         <div className="grid grid-cols-layout gap-4 mt-12 pb-40">
           {currentSongs.map((track, index) => {

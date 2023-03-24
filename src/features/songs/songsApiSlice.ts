@@ -1,16 +1,26 @@
 import { apiSlice } from '../../app/api/apiSlice';
-import { GetChartsReturn } from './types';
+import { FeaturedPlaylists, PlaylistTracks } from './types';
 
 export const songsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getCharts: builder.query<GetChartsReturn, void>({
+    getFeaturedPlaylists: builder.query<FeaturedPlaylists, void>({
       query: () => ({
-        url: '/playlist_tracks',
+        url: '/browse/featured-playlists',
         method: 'GET',
-        params: { id: '37i9dQZF1DX4Wsb4d7NKfP', offset: '0', limit: '100' },
+      }),
+    }),
+    getPlaylistTracks: builder.query<PlaylistTracks, string | undefined>({
+      query: (playlistId: string) => ({
+        url: `/playlists/${playlistId}`,
+        method: 'GET',
+        params: {
+          fields:
+            'id,description,images,name,tracks(items(track(id,name,preview_url,artists(id,name),album(id,name,artists(id,name),images(url)))))',
+        },
       }),
     }),
   }),
 });
 
-export const { useGetChartsQuery } = songsApiSlice;
+export const { useGetFeaturedPlaylistsQuery, useGetPlaylistTracksQuery } =
+  songsApiSlice;

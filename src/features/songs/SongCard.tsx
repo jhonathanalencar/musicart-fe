@@ -6,10 +6,10 @@ import { cn } from '../../utils/classNames';
 import { selectSong } from '../player/playerSlice';
 import { useAppSelector } from '../../app/store';
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
-import { TrackType } from './types';
+import { Track } from './types';
 
 interface SongCardProps {
-  track: TrackType;
+  track: Track;
   songIndex: number;
 }
 

@@ -4,8 +4,10 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_SPOTIFY_API_URL,
     prepareHeaders: (headers) => {
-      headers.set('X-RapidAPI-Key', import.meta.env.VITE_X_RAPID_API_KEY);
-      headers.set('X-RapidAPI-Host', import.meta.env.VITE_X_RAPID_API_HOST);
+      headers.set(
+        'Authorization',
+        `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
+      );
 
       return headers;
     },

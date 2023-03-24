@@ -1,16 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-import { TrackType } from '../songs/types';
+import { Track } from '../songs/types';
 
 interface PlayerState {
-  currentSongs: TrackType[];
-  activeSong: TrackType;
+  currentSongs: Track[];
+  activeSong: Track;
   activeSongIndex: number | null;
 }
 
 const initialState: PlayerState = {
   currentSongs: [],
-  activeSong: {} as TrackType,
+  activeSong: {} as Track,
   activeSongIndex: null,
 };
 
@@ -18,13 +17,10 @@ export const playerSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    setCurrentSongs(state, action: PayloadAction<TrackType[]>) {
+    setCurrentSongs(state, action: PayloadAction<Track[]>) {
       state.currentSongs = action.payload;
     },
-    selectSong(
-      state,
-      action: PayloadAction<{ song: TrackType; index: number }>
-    ) {
+    selectSong(state, action: PayloadAction<{ song: Track; index: number }>) {
       state.activeSong = action.payload.song;
       state.activeSongIndex = action.payload.index;
     },

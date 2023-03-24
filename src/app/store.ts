@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
+import { authReducer } from '../features/auth/authSlice';
 import { playerReducer } from '../features/player/playerSlice';
 
 import { apiSlice } from './api/apiSlice';
@@ -9,6 +10,7 @@ export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     player: playerReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

@@ -7,6 +7,7 @@ export const songsApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: '/browse/featured-playlists',
         method: 'GET',
+        params: { country: 'JP' },
       }),
     }),
     getPlaylistTracks: builder.query<PlaylistTracks, string | undefined>({

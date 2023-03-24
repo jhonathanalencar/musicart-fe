@@ -48,7 +48,12 @@ export function PlaylistTracks() {
             <h1 className="text-2xl text-slate-700 dark:text-slate-300 font-bold">
               {data.name}
             </h1>
-            <p className="text-lg text-slate-400">{data.description}</p>
+            <p className="text-lg text-slate-500 dark:text-slate-400">
+              {data.description}
+            </p>
+            <span className="text-slate-600 dark:text-slate-300 font-semibold text-lg">
+              {data.tracks.total} songs
+            </span>
           </div>
         </header>
 

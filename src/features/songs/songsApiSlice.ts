@@ -16,7 +16,7 @@ export const songsApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
         params: {
           fields:
-            'id,description,images,name,tracks(items(track(id,name,preview_url,artists(id,name),album(id,name,artists(id,name),images(url)))))',
+            'id,description,images,name,tracks(total,items(track(id,name,preview_url,artists(id,name),album(id,name,artists(id,name),images(url)))))',
         },
       }),
     }),

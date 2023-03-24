@@ -18,3 +18,11 @@ body,
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.wrap-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  word-wrap: break-word;
+}

@@ -1,4 +1,4 @@
-export interface FeaturedPlaylists {
+export interface getFeaturedPlaylistsResponse {
   playlists: Playlists;
 }
 
@@ -62,7 +62,7 @@ export interface Tracks {
   total: number;
 }
 
-export interface PlaylistTracks {
+export interface getPlaylistTracksResponse {
   description: string;
   id: string;
   images: Image[];
@@ -115,4 +115,28 @@ export interface Image2 {
 export interface Artist2 {
   id: string;
   name: string;
+}
+
+export interface GetCategoriesResponse {
+  categories: {
+    items: {
+      id: string;
+      name: string;
+    }[];
+    total: number;
+  };
+}
+
+export interface getPlaylistsByGenreResponse {
+  playlists: {
+    items: {
+      description: string;
+      id: string;
+      name: string;
+      images: {
+        url: string;
+      }[];
+    }[];
+    total: number;
+  };
 }

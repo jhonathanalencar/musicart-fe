@@ -25,7 +25,7 @@ export function PlaylistTracks() {
       const tracks = data.tracks.items.map((track) => track.track);
 
       dispatch(
-        setCurrentSongs(tracks.filter((track) => track.preview_url?.length))
+        setCurrentSongs(tracks.filter((track) => track?.preview_url?.length))
       );
     }
   }, [data, dispatch, isSuccess]);

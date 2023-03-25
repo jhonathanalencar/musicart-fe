@@ -1,16 +1,24 @@
 import { apiSlice } from '../../app/api/apiSlice';
-import { FeaturedPlaylists, PlaylistTracks } from './types';
+import {
+  GetCategoriesResponse,
+  getFeaturedPlaylistsResponse,
+  getPlaylistsByGenreResponse,
+  getPlaylistTracksResponse,
+} from './types';
 
 export const songsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getFeaturedPlaylists: builder.query<FeaturedPlaylists, void>({
-      query: () => ({
+    getFeaturedPlaylists: builder.query<getFeaturedPlaylistsResponse, string>({
+      query: (countryCode: string) => ({
         url: '/browse/featured-playlists',
         method: 'GET',
-        params: { country: 'JP' },
+        params: { country: countryCode },
       }),
     }),
-    getPlaylistTracks: builder.query<PlaylistTracks, string | undefined>({
+    getPlaylistTracks: builder.query<
+      getPlaylistTracksResponse,
+      string | undefined
+    >({
       query: (playlistId: string) => ({
         url: `/playlists/${playlistId}`,
         method: 'GET',
@@ -20,8 +28,24 @@ export const songsApiSlice = apiSlice.injectEndpoints({
         },
       }),
     }),
+    getCategories: builder.query<GetCategoriesResponse, void>({
+      query: () => ({
+        url: '/browse/categories',
+        method: 'GET',
+      }),
+    }),
+    getPlaylistsByGenre: builder.query<getPlaylistsByGenreResponse, string>({
+      query: (categoryId: string) => ({
+        url: `/browse/categories/${categoryId}/playlists`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useGetFeaturedPlaylistsQuery, useGetPlaylistTracksQuery } =
-  songsApiSlice;
+export const {
+  useGetFeaturedPlaylistsQuery,
+  useGetPlaylistTracksQuery,
+  useGetCategoriesQuery,
+  useGetPlaylistsByGenreQuery,
+} = songsApiSlice;

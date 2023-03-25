@@ -7,14 +7,15 @@ import { ErrorMessage } from '../components/ErrorMessage';
 
 interface HomeProps {
   countryName: string;
+  countryCode: string;
 }
 
-export function Home({ countryName }: HomeProps) {
+export function Home({ countryName, countryCode }: HomeProps) {
   const {
     data: featurePlaylists,
     isLoading,
     isError,
-  } = useGetFeaturedPlaylistsQuery();
+  } = useGetFeaturedPlaylistsQuery(countryCode);
 
   if (isLoading) {
     return (

@@ -1,11 +1,13 @@
-import { useUserLocation } from '../hooks/useUserLocation';
-
 import { useGetFeaturedPlaylistsQuery } from '../features/songs/songsApiSlice';
 import { PlaylistCard } from '../features/songs/PlaylistCard';
+import { SkeletonPlaylistCard } from '../components/Skeleton/SkeletonPlaylistCard';
+import { Skeleton } from '../components/Skeleton/Skeleton';
 
-export function Home() {
-  const { countryName } = useUserLocation();
+interface HomeProps {
+  countryName: string;
+}
 
+export function Home({ countryName }: HomeProps) {
   const {
     data: featurePlaylists,
     isLoading,
@@ -13,7 +15,19 @@ export function Home() {
   } = useGetFeaturedPlaylistsQuery();
 
   if (isLoading) {
-    return <p className="text-lg text-white font-semibold">Loading...</p>;
+    return (
+      <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
+        <div className="mt-6">
+          <Skeleton classes="title width-50" />
+        </div>
+
+        <div className="grid grid-cols-layout place-items-center gap-4 mt-12 pb-40">
+          {[...Array(10).keys()].map((item) => {
+            return <SkeletonPlaylistCard key={item} />;
+          })}
+        </div>
+      </div>
+    );
   }
 
   if (!featurePlaylists || isError) {
@@ -23,7 +37,7 @@ export function Home() {
   return (
     <section className="h-full w-full overflow-auto hide-scrollbar">
       <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
-        <h1 className="text-2xl text-slate-700 dark:text-slate-300 font-bold mt-6">
+        <h1 className="text-2xl text-slate-700 dark:text-slate-300 font-bold mt-6 animate-slideDown">
           Featured Playlists - {countryName}
         </h1>
 

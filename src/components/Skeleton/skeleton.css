@@ -1,0 +1,49 @@
+.skeleton {
+  --shimmer: #a2a2a2;
+  --shimmerHighlight: #d2d2d2;
+
+  margin: 0.75rem 0;
+  border-radius: 0.25rem;
+
+  background-image: linear-gradient(
+    -90deg,
+    var(--shimmer) 0%,
+    var(--shimmerHighlight) 50%,
+    var(--shimmer) 100%
+  );
+  background-size: 400% 400%;
+}
+
+.skeleton.title {
+  height: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.skeleton.text {
+  height: 0.875rem;
+}
+
+.skeleton.width-100 {
+  width: 100%;
+}
+
+.skeleton.width-50 {
+  width: 50%;
+}
+
+.skeleton.coverart {
+  height: 200px;
+}
+
+.animate-pulse {
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: -135% 0%;
+  }
+}

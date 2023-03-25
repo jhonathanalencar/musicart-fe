@@ -8,6 +8,8 @@ import { useGetPlaylistTracksQuery } from './songsApiSlice';
 
 import { PlaylistHeader } from './PlaylistHeader';
 import { SongCard } from './SongCard';
+import { SkeletonSongCard } from '../../components/Skeleton/SkeletonSongCard';
+import { Skeleton } from '../../components/Skeleton/Skeleton';
 
 export function PlaylistTracks() {
   const { id } = useParams();
@@ -28,7 +30,25 @@ export function PlaylistTracks() {
   }, [data, dispatch, isSuccess]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="h-full w-full overflow-hidden max-w-[1400px] mx-auto px-2 md:px-6">
+        <div className="flex gap-3 mt-6">
+          <div className="w-56 h-56 rounded-md shrink-0">
+            <Skeleton classes="coverart" />
+          </div>
+          <div className="flex flex-col w-full">
+            <Skeleton classes="title width-100" />
+            <Skeleton classes="text width-50" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-layout gap-4 mt-12">
+          {[...Array(10).keys()].map((item) => {
+            return <SkeletonSongCard key={item} />;
+          })}
+        </div>
+      </div>
+    );
   }
 
   if (!data || isError) {

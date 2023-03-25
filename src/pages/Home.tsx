@@ -1,7 +1,9 @@
 import { useGetFeaturedPlaylistsQuery } from '../features/songs/songsApiSlice';
 import { PlaylistCard } from '../features/songs/PlaylistCard';
+
 import { SkeletonPlaylistCard } from '../components/Skeleton/SkeletonPlaylistCard';
 import { Skeleton } from '../components/Skeleton/Skeleton';
+import { ErrorMessage } from '../components/ErrorMessage';
 
 interface HomeProps {
   countryName: string;
@@ -31,7 +33,11 @@ export function Home({ countryName }: HomeProps) {
   }
 
   if (!featurePlaylists || isError) {
-    return <p>error</p>;
+    return (
+      <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
+        <ErrorMessage />
+      </div>
+    );
   }
 
   return (

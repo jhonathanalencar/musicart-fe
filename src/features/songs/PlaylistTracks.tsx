@@ -10,6 +10,7 @@ import { PlaylistHeader } from './PlaylistHeader';
 import { SongCard } from './SongCard';
 import { SkeletonSongCard } from '../../components/Skeleton/SkeletonSongCard';
 import { Skeleton } from '../../components/Skeleton/Skeleton';
+import { ErrorMessage } from '../../components/ErrorMessage';
 
 export function PlaylistTracks() {
   const { id } = useParams();
@@ -52,7 +53,11 @@ export function PlaylistTracks() {
   }
 
   if (!data || isError) {
-    return <p>error</p>;
+    return (
+      <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
+        <ErrorMessage />
+      </div>
+    );
   }
 
   return (

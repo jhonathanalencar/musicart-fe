@@ -53,11 +53,11 @@ export function SongCard({ track, songIndex }: SongCardProps) {
           : 'bg-violet-400  dark:bg-gray-700 border-transparent'
       )}
     >
-      <div className="w-full relative">
+      <div className="w-full relative aspect-square">
         <img
           src={track.album.images[0].url}
           alt={track.name}
-          className="object-cover w-full rounded"
+          className="object-cover w-full h-full rounded"
         />
 
         <div

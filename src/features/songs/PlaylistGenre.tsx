@@ -45,7 +45,7 @@ export function PlaylistGenre({ genreId, genreName }: PlaylistGenreProps) {
   if (!data || isError) return null;
 
   return (
-    <div className="w-full relative animate-slideDown">
+    <div className="w-full relative">
       <h2 className="text-slate-200 text-lg md:text-xl font-bold mt-4 mb-2">
         {genreName}
       </h2>

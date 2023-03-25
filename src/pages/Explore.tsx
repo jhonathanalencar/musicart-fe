@@ -31,11 +31,11 @@ export function Explore() {
         <div className="pb-40">
           {data.categories.items.map((genre, index) => {
             return (
-              <div key={`${index}-${genre}`}>
-                <div className="flex">
-                  <PlaylistGenre genreId={genre.id} genreName={genre.name} />
-                </div>
-              </div>
+              <PlaylistGenre
+                key={`${index}-${genre}`}
+                genreId={genre.id}
+                genreName={genre.name}
+              />
             );
           })}
         </div>

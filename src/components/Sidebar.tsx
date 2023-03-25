@@ -46,7 +46,7 @@ export function Sidebar() {
         )}
       </button>
 
-      <div className="w-full mt-16">
+      <div className="w-full mt-12">
         <Navbar isSidebarOpen={isSidebarOpen} />
       </div>
 

@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom';
+
 import { cn } from '../utils/classNames';
 
 import { NavLink } from './NavLink';
@@ -6,24 +8,35 @@ interface SidebarLinkProps {
   icon: JSX.Element;
   text: string;
   isSidebarOpen: boolean;
+  link: string;
 }
 
-export function SidebarLink({ icon, text, isSidebarOpen }: SidebarLinkProps) {
+export function SidebarLink({
+  icon,
+  text,
+  isSidebarOpen,
+  link,
+}: SidebarLinkProps) {
+  const location = useLocation();
+
   const activeStyles =
     'before:absolute before:left-0 before:top-0 before:h-5 before:w-5 before:bg-violet-300 dark:before:bg-teal-300 before:blur-xl';
 
-  const isActive = false;
+  const isActive = location.pathname === link;
 
   return (
     <NavLink.Root className={cn('py-2 relative', isActive ? activeStyles : '')}>
       <NavLink.Link
-        href="/"
-        className={cn(
-          'px-6 py-1 flex items-center gap-4 border-x-2 border-x-transparent group focus:outline-none focus:ring-2 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-200 dark:focus:ring-offset-slate-800',
-          isActive
-            ? 'border-l-violet-500 dark:border-l-teal-500'
-            : 'border-l-transparent'
-        )}
+        to={link}
+        className={({ isActive }) =>
+          `px-6 py-1 flex items-center gap-4 border-x-2 border-x-transparent group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-900 dark:focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-200 dark:focus-visible:ring-offset-slate-800
+              ${
+                isActive
+                  ? 'border-l-violet-500 dark:border-l-teal-500'
+                  : 'border-l-transparent'
+              }
+            `
+        }
       >
         <NavLink.Icon
           icon={icon}

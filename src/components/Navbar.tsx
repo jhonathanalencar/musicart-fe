@@ -17,6 +17,7 @@ export function Navbar({ isSidebarOpen }: NavbarProps) {
               icon={link.icon}
               text={link.text}
               isSidebarOpen={isSidebarOpen}
+              link={link.href}
             />
           );
         })}

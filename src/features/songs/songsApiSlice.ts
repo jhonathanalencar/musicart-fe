@@ -2,7 +2,7 @@ import { apiSlice } from '../../app/api/apiSlice';
 import {
   GetCategoriesResponse,
   getFeaturedPlaylistsResponse,
-  getPlaylistsByGenreResponse,
+  getPlaylistsByCategoryResponse,
   getPlaylistTracksResponse,
 } from './types';
 
@@ -28,13 +28,26 @@ export const songsApiSlice = apiSlice.injectEndpoints({
         },
       }),
     }),
-    getCategories: builder.query<GetCategoriesResponse, void>({
-      query: () => ({
+    getCategories: builder.query<GetCategoriesResponse, { offset: number }>({
+      query: ({ offset }) => ({
         url: '/browse/categories',
         method: 'GET',
+        params: { limit: 20, offset },
       }),
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCache, newItems) => {
+        currentCache.categories.items.push(...newItems.categories.items);
+      },
+      forceRefetch: ({ currentArg, previousArg }) => {
+        return currentArg?.offset !== previousArg?.offset;
+      },
     }),
-    getPlaylistsByGenre: builder.query<getPlaylistsByGenreResponse, string>({
+    getPlaylistsByCategory: builder.query<
+      getPlaylistsByCategoryResponse,
+      string
+    >({
       query: (categoryId: string) => ({
         url: `/browse/categories/${categoryId}/playlists`,
         method: 'GET',
@@ -47,5 +60,5 @@ export const {
   useGetFeaturedPlaylistsQuery,
   useGetPlaylistTracksQuery,
   useGetCategoriesQuery,
-  useGetPlaylistsByGenreQuery,
+  useGetPlaylistsByCategoryQuery,
 } = songsApiSlice;

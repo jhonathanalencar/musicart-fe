@@ -1,18 +1,24 @@
 import 'keen-slider/keen-slider.min.css';
+import { forwardRef } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 
-import { useGetPlaylistsByGenreQuery } from './songsApiSlice';
+import { useGetPlaylistsByCategoryQuery } from './songsApiSlice';
 
 import { PlaylistCard } from './PlaylistCard';
 import { SkeletonPlaylistCard } from '../../components/Skeleton/SkeletonPlaylistCard';
 
-interface PlaylistGenreProps {
-  genreId: string;
-  genreName: string;
+interface PlaylistCategoryProps {
+  categoryId: string;
+  categoryName: string;
 }
 
-export function PlaylistGenre({ genreId, genreName }: PlaylistGenreProps) {
-  const { data, isLoading, isError } = useGetPlaylistsByGenreQuery(genreId);
+// eslint-disable-next-line react/display-name
+export const PlaylistCategory = forwardRef<
+  HTMLDivElement,
+  PlaylistCategoryProps
+>(({ categoryId, categoryName }, ref) => {
+  const { data, isLoading, isError } =
+    useGetPlaylistsByCategoryQuery(categoryId);
 
   const [sliderRef] = useKeenSlider<HTMLDivElement>({
     slides: { perView: 1 },
@@ -44,10 +50,32 @@ export function PlaylistGenre({ genreId, genreName }: PlaylistGenreProps) {
 
   if (!data || isError) return null;
 
-  return (
+  const content = ref ? (
+    <div className="w-full relative" ref={ref}>
+      <h2 className="text-slate-200 text-lg md:text-xl font-bold mt-4 mb-2">
+        {categoryName}
+      </h2>
+
+      <div ref={sliderRef} className="keen-slider">
+        {data.playlists.items.map((playlist, index) => {
+          if (!playlist) return null;
+
+          return (
+            <div key={`${index}-${playlist.id}`} className="keen-slider__slide">
+              <PlaylistCard
+                coverartUrl={playlist.images[0].url}
+                name={playlist.name}
+                playlistId={playlist.id}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  ) : (
     <div className="w-full relative">
       <h2 className="text-slate-200 text-lg md:text-xl font-bold mt-4 mb-2">
-        {genreName}
+        {categoryName}
       </h2>
 
       <div ref={sliderRef} className="keen-slider">
@@ -67,4 +95,6 @@ export function PlaylistGenre({ genreId, genreName }: PlaylistGenreProps) {
       </div>
     </div>
   );
-}
+
+  return content;
+});

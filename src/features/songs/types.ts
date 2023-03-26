@@ -127,7 +127,7 @@ export interface GetCategoriesResponse {
   };
 }
 
-export interface getPlaylistsByGenreResponse {
+export interface getPlaylistsByCategoryResponse {
   playlists: {
     items: {
       description: string;

@@ -1,14 +1,15 @@
 import { apiSlice } from '../../app/api/apiSlice';
 import {
   GetCategoriesResponse,
-  getFeaturedPlaylistsResponse,
-  getPlaylistsByCategoryResponse,
-  getPlaylistTracksResponse,
+  GetPlaylistTracksResponse,
+  GetFeaturedPlaylistsResponse,
+  GetPlaylistsByCategoryResponse,
+  GetArtistResponse,
 } from './types';
 
 export const songsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getFeaturedPlaylists: builder.query<getFeaturedPlaylistsResponse, string>({
+    getFeaturedPlaylists: builder.query<GetFeaturedPlaylistsResponse, string>({
       query: (countryCode: string) => ({
         url: '/browse/featured-playlists',
         method: 'GET',
@@ -16,7 +17,7 @@ export const songsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getPlaylistTracks: builder.query<
-      getPlaylistTracksResponse,
+      GetPlaylistTracksResponse,
       string | undefined
     >({
       query: (playlistId: string) => ({
@@ -45,11 +46,17 @@ export const songsApiSlice = apiSlice.injectEndpoints({
       },
     }),
     getPlaylistsByCategory: builder.query<
-      getPlaylistsByCategoryResponse,
+      GetPlaylistsByCategoryResponse,
       string
     >({
       query: (categoryId: string) => ({
         url: `/browse/categories/${categoryId}/playlists`,
+        method: 'GET',
+      }),
+    }),
+    getArtist: builder.query<GetArtistResponse, string | undefined>({
+      query: (artistId: string) => ({
+        url: `/artists/${artistId}`,
         method: 'GET',
       }),
     }),
@@ -61,4 +68,5 @@ export const {
   useGetPlaylistTracksQuery,
   useGetCategoriesQuery,
   useGetPlaylistsByCategoryQuery,
+  useGetArtistQuery,
 } = songsApiSlice;

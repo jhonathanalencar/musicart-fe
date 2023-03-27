@@ -1,6 +1,7 @@
 import { KeyboardEvent } from 'react';
 import { Pause, Play } from 'phosphor-react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { cn } from '../../utils/classNames';
 import { selectSong } from '../player/playerSlice';
@@ -83,19 +84,16 @@ export function SongCard({ track, songIndex }: SongCardProps) {
         </div>
       </div>
 
-      <a
-        href="/"
-        className="text-lg text-slate-800 dark:text-slate-200 font-bold leading-tight wrap-text focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-gray-600 focus-visible:ring-2 focus-visible:ring-offset-2 hover:underline"
-      >
+      <span className="text-lg text-slate-800 dark:text-slate-200 font-bold leading-tight wrap-text focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-gray-600 focus-visible:ring-2 focus-visible:ring-offset-2">
         {track.name}
-      </a>
+      </span>
 
-      <a
-        href="/"
+      <Link
+        to={`/artist/${track.artists[0].id}`}
         className="text-slate-700 dark:text-slate-400 font-bold leading-tight wrap-text focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-gray-600 focus-visible:ring-2 focus-visible:ring-offset-2 hover:underline"
       >
-        {track.album.artists[0].name}
-      </a>
+        {track.artists[0].name}
+      </Link>
     </div>
   );
 }

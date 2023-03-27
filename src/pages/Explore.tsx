@@ -13,8 +13,7 @@ export function Explore() {
     offset,
   });
 
-  const hasNextPage =
-    offset < (data?.categories?.total ? data.categories.total : 0);
+  const hasNextPage = data && offset < data.categories.total;
 
   const intersectionObserver = useRef<IntersectionObserver | null>(null);
   const lastPlaylistRef = useCallback(
@@ -56,32 +55,34 @@ export function Explore() {
     return <ErrorMessage />;
   }
 
-  const content = data.categories.items.map((category, index) => {
-    if (data.categories.items.length === index + 1) {
+  const content = data.categories.items
+    .slice(0, data.categories.total)
+    .map((category, index) => {
+      if (data.categories.items.length === index + 1) {
+        return (
+          <PlaylistCategory
+            key={`${index}-${category}`}
+            ref={lastPlaylistRef}
+            categoryId={category.id}
+            categoryName={category.name}
+          />
+        );
+      }
+
       return (
         <PlaylistCategory
           key={`${index}-${category}`}
-          ref={lastPlaylistRef}
           categoryId={category.id}
           categoryName={category.name}
         />
       );
-    }
-
-    return (
-      <PlaylistCategory
-        key={`${index}-${category}`}
-        categoryId={category.id}
-        categoryName={category.name}
-      />
-    );
-  });
+    });
 
   return (
     <section className="h-full w-full overflow-auto hide-scrollbar">
       <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
         <div className="pb-40">
-          <div>{content}</div>
+          <div>{content.filter((el) => el.props)}</div>
           <div className="mt-12 flex justify-center">
             {isFetching ? (
               <CircleNotch

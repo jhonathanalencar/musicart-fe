@@ -1,15 +1,15 @@
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { cn } from '../../utils/classNames';
-import { TrackType } from '../../features/songs/types';
 
 import { VolumeBar } from './VolumeBar';
 import { SeekBar } from './SeekBar';
 import { Controls } from './Controls';
 import { Card } from './Card';
+import { Track } from '../../features/songs/types';
 
 interface AudioPlayerProps {
-  song: TrackType;
+  song: Track;
 }
 
 export function AudioPlayer({ song }: AudioPlayerProps) {

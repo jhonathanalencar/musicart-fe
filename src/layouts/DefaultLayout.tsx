@@ -9,6 +9,7 @@ export function DefaultLayout() {
   const isAboveMediumScreens = useMediaQuery('(min-width: 50em)');
 
   const activeSong = useAppSelector((state) => state.player.activeSong);
+
   return (
     <div className=" w-full flex bg-slate-300 dark:bg-gray-800 duration-500">
       {isAboveMediumScreens ? <Sidebar /> : null}

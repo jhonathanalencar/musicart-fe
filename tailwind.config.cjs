@@ -17,7 +17,7 @@ module.exports = {
         layout: 'repeat(auto-fit, minmax(250px, 1fr))',
       },
       animation: {
-        fadeIn: 'fadeIn 0.75s ease-in-out',
+        fadeIn: 'fadeIn 2s ease-in-out',
         slideDown: 'slideDown 1s ease-in-out',
         slideRight: 'slideRight 1s ease-in-out',
       },

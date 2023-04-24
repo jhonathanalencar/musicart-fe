@@ -42,7 +42,7 @@ export type Playlists = {
     tracks: {
       total: number;
     };
-  };
+  }[];
 };
 
 export interface GetFeaturedPlaylistsResponse {

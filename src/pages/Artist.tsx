@@ -17,5 +17,9 @@ export function Artist() {
 
   console.log(data);
 
-  return <section></section>;
+  return (
+    <section>
+      <img src={data.images[0].url} alt={data.name} />
+    </section>
+  );
 }

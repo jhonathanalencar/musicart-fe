@@ -82,7 +82,7 @@ export function Explore() {
     <section className="h-full w-full overflow-auto hide-scrollbar">
       <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
         <div className="pb-40">
-          <div>{content.filter((el) => el.props)}</div>
+          <div>{content}</div>
           <div className="mt-12 flex justify-center">
             {isFetching ? (
               <CircleNotch

@@ -72,5 +72,3 @@ export interface GetCategoriesResponse {
 export interface GetPlaylistsByCategoryResponse {
   playlists: Playlists;
 }
-
-export type GetArtistResponse = Artist;

@@ -4,7 +4,6 @@ import {
   GetPlaylistTracksResponse,
   GetFeaturedPlaylistsResponse,
   GetPlaylistsByCategoryResponse,
-  GetArtistResponse,
 } from './types';
 
 export const songsApiSlice = apiSlice.injectEndpoints({
@@ -54,12 +53,6 @@ export const songsApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
-    getArtist: builder.query<GetArtistResponse, string | undefined>({
-      query: (artistId: string) => ({
-        url: `/artists/${artistId}`,
-        method: 'GET',
-      }),
-    }),
   }),
 });
 
@@ -68,5 +61,4 @@ export const {
   useGetPlaylistTracksQuery,
   useGetCategoriesQuery,
   useGetPlaylistsByCategoryQuery,
-  useGetArtistQuery,
 } = songsApiSlice;

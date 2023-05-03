@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 
 import {
+  useGetArtistAlbumsQuery,
   useGetArtistByIdQuery,
   useGetArtistTopTracksQuery,
 } from '../features/artists/artistsApiSlice';
@@ -9,6 +10,8 @@ import { ErrorMessage } from '../components/ErrorMessage';
 import { useUserLocation } from '../hooks/useUserLocation';
 import { useKeenSlider } from 'keen-slider/react';
 import { SongCard } from '../features/songs/SongCard';
+import { AlbumCard } from '../features/songs/AlbumCard';
+import { ArtistHeader } from '../features/artists/ArtistHeader';
 
 export function Artist() {
   const { id } = useParams();
@@ -21,6 +24,13 @@ export function Artist() {
     isLoading: isLoadingTopTracks,
     isError: isErrorTopTracks,
   } = useGetArtistTopTracksQuery({ id, countryCode });
+  const {
+    data: albums,
+    isLoading: isLoadingAlbums,
+    isError: isErrorAlbums,
+  } = useGetArtistAlbumsQuery(id, {
+    refetchOnFocus: true,
+  });
 
   const [sliderRef] = useKeenSlider<HTMLDivElement>({
     slides: { perView: 1 },
@@ -40,46 +50,65 @@ export function Artist() {
     },
   });
 
-  if (isLoading || isLoadingTopTracks) {
+  if (isLoading || isLoadingTopTracks || isLoadingAlbums) {
     return <p>Loading</p>;
   }
 
-  if (!data || isError || !topTracks || isErrorTopTracks) {
+  if (
+    !data ||
+    isError ||
+    !topTracks ||
+    isErrorTopTracks ||
+    !albums ||
+    isErrorAlbums
+  ) {
     return <ErrorMessage />;
   }
 
   console.log(data);
   console.log(topTracks);
+  console.log(albums);
 
   return (
-    <section className="h-full w-full">
+    <section className="h-full w-full overflow-auto hide-scrollbar">
       <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
-        <div className="w-full h-full mt-6">
-          <div className="flex items-center gap-6 pb-4 mb-4 border-b-2 border-b-gray-400 dark:border-b-gray-600">
-            <div className="h-64 w-64 rounded-full overflow-hidden">
-              <img
-                src={data.images[0]?.url}
-                alt={data.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <strong className="text-3xl md:text-5xl text-gray-800 dark:text-white font-bold">
-              {data.name}
-            </strong>
-          </div>
+        <div className="mt-6 pb-40">
+          <div className="w-full h-full">
+            <ArtistHeader name={data.name} imageUrl={data.images[0].url} />
 
-          <div className="w-full flex flex-col gap-3">
-            <h2 className="text-lg md:text-3xl font-semibold text-gray-700 dark:text-gray-200">
-              Top Tracks
-            </h2>
-            <div ref={sliderRef} className="keen-slider">
-              {topTracks.tracks.map((track, index) => {
-                return (
-                  <div key={track.id} className="keen-slider__slide flex">
-                    <SongCard songIndex={index} track={track} />
-                  </div>
-                );
-              })}
+            <div className="w-full flex flex-col gap-3">
+              <h2 className="text-lg md:text-3xl font-semibold text-gray-700 dark:text-gray-200">
+                Top Tracks
+              </h2>
+              <div ref={sliderRef} className="keen-slider">
+                {topTracks.tracks.map((track, index) => {
+                  return (
+                    <div key={track.id} className="keen-slider__slide flex">
+                      <SongCard songIndex={index} track={track} />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="w-full flex flex-col gap-3 mt-4">
+              <h2 className="text-lg md:text-3xl font-semibold text-gray-700 dark:text-gray-200">
+                Albums
+              </h2>
+              <div ref={sliderRef} className="keen-slider">
+                {albums.items.map((album) => {
+                  return (
+                    <div key={album.id} className="keen-slider__slide flex">
+                      <AlbumCard
+                        key={album.id}
+                        name={album.name}
+                        albumId={album.id}
+                        coverartUrl={album.images[0].url}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

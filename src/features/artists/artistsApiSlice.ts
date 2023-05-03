@@ -1,6 +1,10 @@
 import { apiSlice } from '../../app/api/apiSlice';
 
-import { GetArtistResponse, GetArtistTopTracksResponse } from './types';
+import {
+  GetArtistAlbumsResponse,
+  GetArtistResponse,
+  GetArtistTopTracksResponse,
+} from './types';
 
 const artistsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -20,8 +24,21 @@ const artistsApiSlice = apiSlice.injectEndpoints({
         params: { country: countryCode },
       }),
     }),
+    getArtistAlbums: builder.query<GetArtistAlbumsResponse, string | undefined>(
+      {
+        query: (artistId: string) => ({
+          url: `/artists/${artistId}/albums`,
+          params: {
+            include_groups: 'single,appears_on',
+          },
+        }),
+      }
+    ),
   }),
 });
 
-export const { useGetArtistByIdQuery, useGetArtistTopTracksQuery } =
-  artistsApiSlice;
+export const {
+  useGetArtistByIdQuery,
+  useGetArtistTopTracksQuery,
+  useGetArtistAlbumsQuery,
+} = artistsApiSlice;

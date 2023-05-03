@@ -45,6 +45,21 @@ export type Playlists = {
   }[];
 };
 
+export type Albums = {
+  total: number;
+  items: {
+    id: string;
+    release_date: string;
+    name: string;
+    images: Image[];
+    total_tracks: number;
+    artists: {
+      id: string;
+      name: string;
+    }[];
+  }[];
+};
+
 export interface GetFeaturedPlaylistsResponse {
   playlists: Playlists;
 }

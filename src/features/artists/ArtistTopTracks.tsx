@@ -25,7 +25,7 @@ export function ArtistTopTracks({ artistId }: ArtistTopTracksProps) {
       <div className="w-full flex flex-col gap-3 mt-4">
         <Skeleton classes="title width-50" />
 
-        <div className="w-full flex gap-2">
+        <div className="w-full flex gap-2 justify-between">
           {[...Array(slidesPerView).keys()].map((item) => {
             return <SkeletonSongCard key={item} />;
           })}

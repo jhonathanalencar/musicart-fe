@@ -35,6 +35,10 @@
   height: 200px;
 }
 
+.skeleton.profile {
+  border-radius: 50%;
+}
+
 .animate-pulse {
   animation: shimmer 1.2s ease-in-out infinite;
 }

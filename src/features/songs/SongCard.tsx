@@ -60,7 +60,7 @@ export function SongCard({ track, songIndex, animate = true }: SongCardProps) {
         <img
           src={track.album.images[0].url}
           alt={track.name}
-          className="object-cover w-60 h-60 rounded"
+          className="object-cover w-full h-full rounded"
         />
 
         <div

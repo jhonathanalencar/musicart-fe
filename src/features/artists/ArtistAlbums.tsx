@@ -19,7 +19,7 @@ export function ArtistAlbums({ artistId }: ArtistAlbumsProps) {
       <div className="w-full flex flex-col gap-3 mt-4">
         <Skeleton classes="title width-50" />
 
-        <div className="w-full flex gap-2">
+        <div className="w-full flex gap-2 justify-between">
           {[...Array(slidesPerView).keys()].map((item) => {
             return <SkeletonPlaylistCard key={item} />;
           })}

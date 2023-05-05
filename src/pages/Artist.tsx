@@ -7,6 +7,7 @@ import { ArtistHeader } from '../features/artists/ArtistHeader';
 import { RelatedArtists } from '../features/artists/RelatedArtists';
 import { ArtistTopTracks } from '../features/artists/ArtistTopTracks';
 import { ArtistAlbums } from '../features/artists/ArtistAlbums';
+import { Skeleton } from '../components/Skeleton/Skeleton';
 
 export function Artist() {
   const { id } = useParams();
@@ -14,7 +15,22 @@ export function Artist() {
   const { data, isLoading, isError } = useGetArtistByIdQuery(id);
 
   if (isLoading) {
-    return <p>Loading</p>;
+    return (
+      <section className="h-full w-full overflow-auto hide-scrollbar">
+        <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
+          <div className="mt-6 pb-40">
+            <div className="w-full h-full">
+              <div className="flex items-center gap-3 pb-4 mb-4 border-b-2 border-b-gray-400 dark:border-b-gray-600">
+                <div className="h-52 w-52 md:h-64 md:w-64 rounded-full aspect-square">
+                  <Skeleton classes="coverart profile" />
+                </div>
+                <Skeleton classes="text width-50" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   if (!data || isError) {

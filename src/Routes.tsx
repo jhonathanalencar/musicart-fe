@@ -7,6 +7,7 @@ import { PlaylistTracks } from './features/songs/PlaylistTracks';
 import { useUserLocation } from './hooks/useUserLocation';
 import { Explore } from './pages/Explore';
 import { Artist } from './pages/Artist';
+import { AlbumTracks } from './features/songs/AlbumTracks';
 
 export function Router() {
   const { countryName, countryCode } = useUserLocation();
@@ -25,6 +26,7 @@ export function Router() {
           <Route path="/playlist/:id" element={<PlaylistTracks />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/artist/:id" element={<Artist />} />
+          <Route path="/album/:id" element={<AlbumTracks />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,9 +1,9 @@
-import { ErrorMessage } from '../../components/ErrorMessage';
+import { useSlidesPerView } from '../../hooks/useSlidesPerView';
+import { useUserLocation } from '../../hooks/useUserLocation';
+
 import { Skeleton } from '../../components/Skeleton/Skeleton';
 import { SkeletonSongCard } from '../../components/Skeleton/SkeletonSongCard';
 import { Slider } from '../../components/Slider';
-import { useSlidesPerView } from '../../hooks/useSlidesPerView';
-import { useUserLocation } from '../../hooks/useUserLocation';
 import { useGetArtistTopTracksQuery } from './artistsApiSlice';
 
 interface ArtistTopTracksProps {
@@ -20,7 +20,7 @@ export function ArtistTopTracks({ artistId }: ArtistTopTracksProps) {
 
   const { slidesPerView } = useSlidesPerView();
 
-  if (!isLoading) {
+  if (isLoading) {
     return (
       <div className="w-full flex flex-col gap-3 mt-4">
         <Skeleton classes="title width-50" />

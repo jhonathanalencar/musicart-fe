@@ -4,6 +4,7 @@ import {
   GetArtistAlbumsResponse,
   GetArtistResponse,
   GetArtistTopTracksResponse,
+  GetRelatedArtistsResponse,
 } from './types';
 
 const artistsApiSlice = apiSlice.injectEndpoints({
@@ -34,6 +35,15 @@ const artistsApiSlice = apiSlice.injectEndpoints({
         }),
       }
     ),
+    getRelatedArtists: builder.query<
+      GetRelatedArtistsResponse,
+      string | undefined
+    >({
+      query: (artistId) => ({
+        url: `/artists/${artistId}/related-artists`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -41,4 +51,5 @@ export const {
   useGetArtistByIdQuery,
   useGetArtistTopTracksQuery,
   useGetArtistAlbumsQuery,
+  useGetRelatedArtistsQuery,
 } = artistsApiSlice;

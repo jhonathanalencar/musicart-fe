@@ -4,14 +4,14 @@ import {
   useGetArtistAlbumsQuery,
   useGetArtistByIdQuery,
   useGetArtistTopTracksQuery,
+  useGetRelatedArtistsQuery,
 } from '../features/artists/artistsApiSlice';
 
 import { ErrorMessage } from '../components/ErrorMessage';
 import { useUserLocation } from '../hooks/useUserLocation';
-import { useKeenSlider } from 'keen-slider/react';
-import { SongCard } from '../features/songs/SongCard';
-import { AlbumCard } from '../features/songs/AlbumCard';
 import { ArtistHeader } from '../features/artists/ArtistHeader';
+import { RelatedArtists } from '../features/artists/RelatedArtists';
+import { Slider } from '../components/Slider';
 
 export function Artist() {
   const { id } = useParams();
@@ -28,29 +28,19 @@ export function Artist() {
     data: albums,
     isLoading: isLoadingAlbums,
     isError: isErrorAlbums,
-  } = useGetArtistAlbumsQuery(id, {
-    refetchOnFocus: true,
-  });
+  } = useGetArtistAlbumsQuery(id);
+  const {
+    data: relatedArtists,
+    isLoading: isLoadingRelatedArtists,
+    isError: isErrorRelatedArtists,
+  } = useGetRelatedArtistsQuery(id);
 
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    slides: { perView: 1 },
-    breakpoints: {
-      '(min-width: 35em)': {
-        slides: { perView: 2, spacing: 5 },
-      },
-      '(min-width: 45em)': {
-        slides: { perView: 3, spacing: 5 },
-      },
-      '(min-width: 50em)': {
-        slides: { perView: 4, spacing: 5 },
-      },
-      '(min-width: 60em)': {
-        slides: { perView: 5, spacing: 10 },
-      },
-    },
-  });
-
-  if (isLoading || isLoadingTopTracks || isLoadingAlbums) {
+  if (
+    isLoading ||
+    isLoadingTopTracks ||
+    isLoadingAlbums ||
+    isLoadingRelatedArtists
+  ) {
     return <p>Loading</p>;
   }
 
@@ -60,7 +50,9 @@ export function Artist() {
     !topTracks ||
     isErrorTopTracks ||
     !albums ||
-    isErrorAlbums
+    isErrorAlbums ||
+    !relatedArtists ||
+    isErrorRelatedArtists
   ) {
     return <ErrorMessage />;
   }
@@ -68,6 +60,7 @@ export function Artist() {
   console.log(data);
   console.log(topTracks);
   console.log(albums);
+  console.log(relatedArtists);
 
   return (
     <section className="h-full w-full overflow-auto hide-scrollbar">
@@ -80,36 +73,18 @@ export function Artist() {
               <h2 className="text-lg md:text-3xl font-semibold text-gray-700 dark:text-gray-200">
                 Top Tracks
               </h2>
-              <div ref={sliderRef} className="keen-slider">
-                {topTracks.tracks.map((track, index) => {
-                  return (
-                    <div key={track.id} className="keen-slider__slide flex">
-                      <SongCard songIndex={index} track={track} />
-                    </div>
-                  );
-                })}
-              </div>
+
+              <Slider sliderItems={topTracks} />
             </div>
 
             <div className="w-full flex flex-col gap-3 mt-4">
               <h2 className="text-lg md:text-3xl font-semibold text-gray-700 dark:text-gray-200">
                 Albums
               </h2>
-              <div ref={sliderRef} className="keen-slider">
-                {albums.items.map((album) => {
-                  return (
-                    <div key={album.id} className="keen-slider__slide flex">
-                      <AlbumCard
-                        key={album.id}
-                        name={album.name}
-                        albumId={album.id}
-                        coverartUrl={album.images[0].url}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
+              <Slider sliderItems={albums} />
             </div>
+
+            <RelatedArtists artistId={id} />
           </div>
         </div>
       </div>

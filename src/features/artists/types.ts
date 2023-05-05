@@ -7,3 +7,7 @@ export type GetArtistTopTracksResponse = {
 };
 
 export type GetArtistAlbumsResponse = Albums;
+
+export type GetRelatedArtistsResponse = {
+  artists: Artist[];
+};

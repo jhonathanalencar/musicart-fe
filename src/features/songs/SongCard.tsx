@@ -12,9 +12,10 @@ import { Track } from './types';
 interface SongCardProps {
   track: Track;
   songIndex: number;
+  animate?: boolean;
 }
 
-export function SongCard({ track, songIndex }: SongCardProps) {
+export function SongCard({ track, songIndex, animate = true }: SongCardProps) {
   const dispatch = useDispatch();
 
   const activeSongIndex = useAppSelector(
@@ -48,17 +49,18 @@ export function SongCard({ track, songIndex }: SongCardProps) {
       onClick={handlePlay}
       onKeyDown={(event) => handleKeyDown(event)}
       className={cn(
-        'group p-3 rounded flex flex-col gap-1 border-2 animate-slideDown drop-shadow-sm shadow-md cursor-pointer hover:bg-violet-500 dark:hover:bg-gray-600 focus:bg-violet-500 focus-within:bg-violet-500 dark:focus:bg-gray-600 dark:focus-within:bg-gray-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-300 dark:focus:ring-offset-gray-800',
+        'group p-3 rounded flex flex-col flex-1 gap-1 border-2 drop-shadow-sm shadow-md cursor-pointer hover:bg-violet-500 dark:hover:bg-gray-600 focus:bg-violet-500 focus-within:bg-violet-500 dark:focus:bg-gray-600 dark:focus-within:bg-gray-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-300 dark:focus:ring-offset-gray-800',
         isActiveSong
           ? 'bg-violet-500 dark:bg-gray-600 border-violet-700 dark:border-violet-400'
-          : 'bg-violet-400  dark:bg-gray-700 border-transparent'
+          : 'bg-violet-400  dark:bg-gray-700 border-transparent',
+        animate ? 'animate-slideDown' : ''
       )}
     >
       <div className="w-full relative aspect-square">
         <img
           src={track.album.images[0].url}
           alt={track.name}
-          className="object-cover w-full h-full rounded"
+          className="object-cover w-60 h-60 rounded"
         />
 
         <div

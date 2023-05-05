@@ -26,3 +26,9 @@ body,
   overflow: hidden;
   word-wrap: break-word;
 }
+
+@media (max-width: 50em) {
+  .wrap-text {
+    -webkit-line-clamp: 1;
+  }
+}

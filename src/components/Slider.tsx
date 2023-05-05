@@ -5,6 +5,7 @@ import { Albums, Artist, Track } from '../features/songs/types';
 import { AlbumCard } from '../features/songs/AlbumCard';
 import { ArtistCard } from '../features/artists/ArtistCard';
 import { SongCard } from '../features/songs/SongCard';
+import { useSlidesPerView } from '../hooks/useSlidesPerView';
 
 interface SliderProps {
   sliderItems: Albums | { artists: Artist[] } | { tracks: Track[] };
@@ -15,35 +16,7 @@ export function Slider({ sliderItems }: SliderProps) {
     'bg-violet-500 dark:bg-gray-900 p-1 rounded-full disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-violet-500 disabled:dark:bg-gray-900 hover:bg-violet-600 dark:hover:bg-gray-700 focus-visible:bg-violet-600 dark:focus-visible:bg-gray-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-900 dark:focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-300 dark:focus-visible:ring-offset-gray-800';
 
   const [slideIndex, setSlideIndex] = useState(0);
-  const [slidesPerView, setSlidesPerView] = useState(1);
-
-  useEffect(() => {
-    function handleMediaQuery() {
-      if (!window.matchMedia('(min-width: 35em)').matches) {
-        setSlidesPerView(1);
-      }
-      if (window.matchMedia('(min-width: 35em)').matches) {
-        setSlidesPerView(2);
-      }
-      if (window.matchMedia('(min-width: 45em)').matches) {
-        setSlidesPerView(3);
-      }
-      if (window.matchMedia('(min-width: 50em)').matches) {
-        setSlidesPerView(4);
-      }
-      if (window.matchMedia('(min-width: 60em)').matches) {
-        setSlidesPerView(5);
-      }
-    }
-
-    window.addEventListener('resize', handleMediaQuery);
-
-    handleMediaQuery();
-
-    return () => {
-      window.removeEventListener('resize', handleMediaQuery);
-    };
-  }, []);
+  const { slidesPerView } = useSlidesPerView();
 
   function resetSliderIndex() {
     setSlideIndex(0);

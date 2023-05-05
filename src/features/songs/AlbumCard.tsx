@@ -31,7 +31,7 @@ export function AlbumCard({ albumId, name, coverartUrl }: AlbumCardProps) {
       <img
         src={coverartUrl}
         alt={`${name} Album`}
-        className="object-cover aspect-square w-60 h-60"
+        className="object-cover aspect-square w-full h-full"
       />
       <p className="text-slate-200 wrap-text">{name}</p>
     </div>

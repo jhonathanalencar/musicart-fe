@@ -17,10 +17,10 @@ const artistsApiSlice = apiSlice.injectEndpoints({
     }),
     getArtistTopTracks: builder.query<
       GetArtistTopTracksResponse,
-      { id: string | undefined; countryCode: string }
+      { artistId: string | undefined; countryCode: string }
     >({
-      query: ({ id, countryCode }) => ({
-        url: `/artists/${id}/top-tracks`,
+      query: ({ artistId, countryCode }) => ({
+        url: `/artists/${artistId}/top-tracks`,
         method: 'GET',
         params: { country: countryCode },
       }),

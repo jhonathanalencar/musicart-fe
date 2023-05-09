@@ -48,7 +48,7 @@ export function AudioPlayer({ song }: AudioPlayerProps) {
           <Card
             coverart={song.album.images[0].url}
             title={song.name}
-            subtitle={song.album.artists[0].name}
+            subtitle={song.artists[0].name}
           />
         ) : null}
 
@@ -58,7 +58,7 @@ export function AudioPlayer({ song }: AudioPlayerProps) {
               <Card
                 coverart={song.album.images[0].url}
                 title={song.name}
-                subtitle={song.album.artists[0].name}
+                subtitle={song.artists[0].name}
               />
 
               <div className="flex">

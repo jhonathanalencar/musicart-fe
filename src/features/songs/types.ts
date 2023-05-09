@@ -87,3 +87,26 @@ export interface GetCategoriesResponse {
 export interface GetPlaylistsByCategoryResponse {
   playlists: Playlists;
 }
+
+export interface GetAlbumTracksResponse {
+  items: {
+    id: string;
+    artists: Artist[];
+    name: string;
+    preview_url: string;
+  }[];
+  total: number;
+}
+
+export interface GetAlbumResponse extends Album {
+  label: string;
+  tracks: {
+    items: {
+      artists: Artist[];
+      id: string;
+      name: string;
+      preview_url: string;
+    }[];
+    total: number;
+  };
+}

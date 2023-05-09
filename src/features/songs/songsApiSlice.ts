@@ -4,6 +4,8 @@ import {
   GetPlaylistTracksResponse,
   GetFeaturedPlaylistsResponse,
   GetPlaylistsByCategoryResponse,
+  GetAlbumTracksResponse,
+  GetAlbumResponse,
 } from './types';
 
 export const songsApiSlice = apiSlice.injectEndpoints({
@@ -53,6 +55,18 @@ export const songsApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getAlbumsTracks: builder.query<GetAlbumTracksResponse, string | undefined>({
+      query: (albumId: string) => ({
+        url: `/albums/${albumId}/tracks`,
+        method: 'GET',
+      }),
+    }),
+    getAlbum: builder.query<GetAlbumResponse, string | undefined>({
+      query: (albumId: string) => ({
+        url: `/albums/${albumId}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -61,4 +75,6 @@ export const {
   useGetPlaylistTracksQuery,
   useGetCategoriesQuery,
   useGetPlaylistsByCategoryQuery,
+  useGetAlbumsTracksQuery,
+  useGetAlbumQuery,
 } = songsApiSlice;

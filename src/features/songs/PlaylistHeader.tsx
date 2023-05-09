@@ -28,7 +28,7 @@ export function PlaylistHeader({
       >
         <ArrowLeft weight="bold" className="w-8 h-8 " />
       </button>
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row gap-3">
         <div className="w-56 h-56 rounded-md overflow-hidden shrink-0">
           <img
             src={coverartUrl}

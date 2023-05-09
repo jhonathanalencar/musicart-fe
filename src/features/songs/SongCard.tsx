@@ -86,14 +86,14 @@ export function SongCard({ track, songIndex, animate = true }: SongCardProps) {
         </div>
       </div>
 
-      <span className="text-lg text-slate-800 dark:text-slate-200 font-bold leading-tight wrap-text focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-gray-600 focus-visible:ring-2 focus-visible:ring-offset-2">
+      <span className="shrink-0 text-lg text-slate-800 dark:text-slate-200 font-bold leading-tight wrap-text focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-gray-600 focus-visible:ring-2 focus-visible:ring-offset-2">
         {track.name}
       </span>
 
       <Link
         to={`/artist/${track.artists[0].id}`}
         onClick={(e) => e.stopPropagation()}
-        className="text-slate-700 dark:text-slate-400 font-bold leading-tight wrap-text focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-gray-600 focus-visible:ring-2 focus-visible:ring-offset-2 hover:underline"
+        className="shrink-0 text-slate-700 dark:text-slate-400 font-bold leading-tight wrap-text focus:outline-none focus:ring-0 focus:ring-violet-900 dark:focus:ring-violet-500 focus:ring-offset-0 focus:ring-offset-violet-500 dark:focus:ring-offset-gray-600 focus-visible:ring-2 focus-visible:ring-offset-2 hover:underline"
       >
         {track.artists[0].name}
       </Link>

@@ -52,7 +52,8 @@ export function Slider({ sliderItems }: SliderProps) {
     ? sliderItems.artists
     : sliderItems.tracks.filter((track) => track.preview_url);
 
-  const disableNextSlide = slideIndex + slidesPerView === itemsArray.length;
+  const disableNextSlide =
+    slideIndex + slidesPerView === itemsArray.length || itemsArray.length === 1;
   const disablePrevSlide = slideIndex === 0;
 
   const content = isAlbums(sliderItems)

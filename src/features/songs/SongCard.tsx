@@ -56,7 +56,7 @@ export function SongCard({ track, songIndex, animate = true }: SongCardProps) {
         animate ? 'animate-slideDown' : ''
       )}
     >
-      <div className="w-full relative aspect-square">
+      <div className="w-full relative aspect-square h-full max-h-72">
         <img
           src={track.album.images[0].url}
           alt={track.name}

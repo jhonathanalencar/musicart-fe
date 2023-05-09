@@ -37,8 +37,6 @@ export function Artist() {
     return <ErrorMessage />;
   }
 
-  console.log(data);
-
   return (
     <section className="h-full w-full overflow-auto hide-scrollbar">
       <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">

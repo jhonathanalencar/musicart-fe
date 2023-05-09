@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { useSlidesPerView } from '../../hooks/useSlidesPerView';
 import { useUserLocation } from '../../hooks/useUserLocation';
 
@@ -5,6 +8,7 @@ import { Skeleton } from '../../components/Skeleton/Skeleton';
 import { SkeletonSongCard } from '../../components/Skeleton/SkeletonSongCard';
 import { Slider } from '../../components/Slider';
 import { useGetArtistTopTracksQuery } from './artistsApiSlice';
+import { setCurrentSongs } from '../player/playerSlice';
 
 interface ArtistTopTracksProps {
   artistId: string | undefined;
@@ -12,13 +16,26 @@ interface ArtistTopTracksProps {
 
 export function ArtistTopTracks({ artistId }: ArtistTopTracksProps) {
   const { countryCode } = useUserLocation();
+  const dispatch = useDispatch();
 
-  const { data, isLoading, isError } = useGetArtistTopTracksQuery({
+  const { data, isLoading, isError, isSuccess } = useGetArtistTopTracksQuery({
     artistId,
     countryCode,
   });
 
   const { slidesPerView } = useSlidesPerView();
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(
+        setCurrentSongs(
+          data.tracks
+            .map((track) => track)
+            .filter((track) => track.preview_url?.length)
+        )
+      );
+    }
+  }, [data, dispatch, isSuccess]);
 
   if (isLoading) {
     return (

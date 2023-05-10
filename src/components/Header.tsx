@@ -6,6 +6,7 @@ import logo from '../assets/musicart-logo.png';
 
 import { Navbar } from './Navbar';
 import { ThemeSwitch } from './ThemeSwitch';
+import { SearchBar } from './SearchBar';
 
 const buttonStyles =
   'rounded-md text-lg font-semibold py-2 w-full min-w-32 bg-violet-500 text-gray-100 hover:bg-violet-600 focus:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-200 dark:focus:ring-offset-slate-800 transition-colors';
@@ -90,7 +91,7 @@ export function Header() {
             <MagnifyingGlass weight="bold" className="h-8 w-8" />
           </button>
         ) : (
-          <input type="text" placeholder="search" />
+          <SearchBar />
         )}
 
         {!isBelowMediumScreens ? (

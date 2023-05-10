@@ -18,9 +18,6 @@ interface SongCardProps {
 export function SongCard({ track, songIndex, animate = true }: SongCardProps) {
   const dispatch = useDispatch();
 
-  const activeSongIndex = useAppSelector(
-    (state) => state.player.activeSongIndex
-  );
   const activeSong = useAppSelector((state) => state.player.activeSong);
 
   const { isPlaying, togglePlaying } = useAudioPlayer();

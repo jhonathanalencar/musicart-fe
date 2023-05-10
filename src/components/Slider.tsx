@@ -49,7 +49,7 @@ export function Slider({ sliderItems }: SliderProps) {
   const itemsArray = isAlbums(sliderItems)
     ? sliderItems.items
     : isArtist(sliderItems)
-    ? sliderItems.artists
+    ? sliderItems.artists.filter((artist) => artist.images[0]?.url)
     : sliderItems.tracks.filter((track) => track.preview_url);
 
   const disableNextSlide =
@@ -72,13 +72,14 @@ export function Slider({ sliderItems }: SliderProps) {
         })
     : isArtist(sliderItems)
     ? sliderItems.artists
+        .filter((artist) => artist.images[0]?.url)
         .slice(slideIndex, slideIndex + slidesPerView)
         .map((artist) => {
           return (
             <ArtistCard
               key={artist.id}
               artistId={artist.id}
-              imageUrl={artist.images[0].url}
+              imageUrl={artist.images[0]?.url}
               name={artist.name}
             />
           );
@@ -99,7 +100,7 @@ export function Slider({ sliderItems }: SliderProps) {
 
   return (
     <div className="w-full flex flex-col gap-4">
-      <div className="flex justify-between gap-2 w-full">{content}</div>
+      <div className="flex flex-1 justify-between gap-2 w-full">{content}</div>
 
       <div className="flex items-center justify-start gap-2">
         <button

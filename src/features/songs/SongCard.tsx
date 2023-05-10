@@ -39,8 +39,7 @@ export function SongCard({ track, songIndex, animate = true }: SongCardProps) {
     }
   }
 
-  const isActiveSong =
-    songIndex === activeSongIndex && activeSong.id === track.id;
+  const isActiveSong = activeSong.id === track.id;
 
   return (
     <div

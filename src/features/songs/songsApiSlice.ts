@@ -6,6 +6,7 @@ import {
   GetPlaylistsByCategoryResponse,
   GetAlbumTracksResponse,
   GetAlbumResponse,
+  GetSearchForItemResponse,
 } from './types';
 
 export const songsApiSlice = apiSlice.injectEndpoints({
@@ -67,6 +68,16 @@ export const songsApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
       }),
     }),
+    searchForItem: builder.query<GetSearchForItemResponse, string | undefined>({
+      query: (query: string) => ({
+        url: '/search',
+        method: 'GET',
+        params: {
+          q: query,
+          type: ['track', 'artist', 'playlist', 'album'],
+        },
+      }),
+    }),
   }),
 });
 
@@ -77,4 +88,5 @@ export const {
   useGetPlaylistsByCategoryQuery,
   useGetAlbumsTracksQuery,
   useGetAlbumQuery,
+  useSearchForItemQuery,
 } = songsApiSlice;

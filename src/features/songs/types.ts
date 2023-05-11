@@ -110,3 +110,16 @@ export interface GetAlbumResponse extends Album {
     total: number;
   };
 }
+
+export interface GetSearchForItemResponse {
+  albums: Albums;
+  artists: {
+    total: number;
+    items: Artist[];
+  };
+  playlists: Playlists;
+  tracks: {
+    total: number;
+    items: Track[];
+  };
+}

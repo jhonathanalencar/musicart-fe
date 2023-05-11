@@ -52,7 +52,11 @@ export function Explore() {
   }
 
   if (!data || isError) {
-    return <ErrorMessage />;
+    return (
+      <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
+        <ErrorMessage />
+      </div>
+    );
   }
 
   const content = data.categories.items

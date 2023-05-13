@@ -53,6 +53,10 @@ export function ArtistTopTracks({ artistId }: ArtistTopTracksProps) {
 
   if (!data || isError) return null;
 
+  const isEmpty = data.tracks.filter((track) => track.preview_url).length === 0;
+
+  if (isEmpty) return null;
+
   return (
     <div className="w-full flex flex-col gap-3">
       <h2 className="text-lg md:text-3xl font-semibold text-gray-700 dark:text-gray-200">

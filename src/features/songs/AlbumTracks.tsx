@@ -80,6 +80,39 @@ export function AlbumTracks() {
     );
   }
 
+  const isEmpty =
+    data.tracks.items.filter((track) => track.preview_url).length === 0;
+
+  const content = isEmpty ? (
+    <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6 pt-4">
+      <ErrorMessage message="No songs available" />
+    </div>
+  ) : (
+    <div className="grid grid-cols-layout gap-4 mt-12 pb-40">
+      {currentSongs.map((track, index) => {
+        return (
+          <SongCard
+            key={track.id}
+            songIndex={index}
+            track={{
+              id: track.id,
+              artists: track.artists,
+              name: track.name,
+              preview_url: track.preview_url,
+              album: {
+                genres: data.genres,
+                id: data.id,
+                images: data.images,
+                name: data.name,
+                total_tracks: data.total_tracks,
+              },
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+
   return (
     <section className="h-full w-full overflow-auto hide-scrollbar">
       <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
@@ -90,29 +123,7 @@ export function AlbumTracks() {
           songsAmount={data.total_tracks}
         />
 
-        <div className="grid grid-cols-layout gap-4 mt-12 pb-40">
-          {currentSongs.map((track, index) => {
-            return (
-              <SongCard
-                key={track.id}
-                songIndex={index}
-                track={{
-                  id: track.id,
-                  artists: track.artists,
-                  name: track.name,
-                  preview_url: track.preview_url,
-                  album: {
-                    genres: data.genres,
-                    id: data.id,
-                    images: data.images,
-                    name: data.name,
-                    total_tracks: data.total_tracks,
-                  },
-                }}
-              />
-            );
-          })}
-        </div>
+        {content}
       </div>
     </section>
   );

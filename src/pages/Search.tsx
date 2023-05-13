@@ -6,6 +6,7 @@ import { useKeenSlider } from 'keen-slider/react';
 import { SongCard } from '../features/songs/SongCard';
 import { Content } from '../features/search/Content';
 import { ArtistCard } from '../features/artists/ArtistCard';
+import { AlbumCard } from '../features/songs/AlbumCard';
 
 export function Search() {
   const { query } = useParams();
@@ -48,39 +49,56 @@ export function Search() {
     <section className="h-full w-full overflow-auto hide-scrollbar">
       <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
         <div className="pb-40">
-          <div className="w-full flex flex-col gap-3 mt-4">
-            <h2 className="text-lg md:text-3xl font-semibold text-gray-700 dark:text-gray-200">
-              Tracks
-            </h2>
+          <Content
+            title="Tracks"
+            content={
+              <div ref={sliderRef} className="keen-slider">
+                {data.tracks.items.map((track, index) => {
+                  return (
+                    <div key={track.id} className="keen-slider__slide">
+                      <SongCard
+                        track={track}
+                        songIndex={index}
+                        className="h-full"
+                        animate={false}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            }
+          />
 
-            <div ref={sliderRef} className="keen-slider">
-              {data.tracks.items.map((track, index) => {
-                return (
-                  <div key={track.id} className="keen-slider__slide">
-                    <SongCard
-                      track={track}
-                      songIndex={index}
-                      className="h-full"
-                      animate={false}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
           <Content
             title="Artists"
             content={
               <div ref={sliderRef} className="keen-slider">
                 {data.artists.items.map((artist) => {
-                  if (!artist.images[0]?.url.length) return null;
-
                   return (
                     <div key={artist.id} className="keen-slider__slide">
                       <ArtistCard
                         artistId={artist.id}
                         imageUrl={artist.images[0]?.url}
                         name={artist.name}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            }
+          />
+
+          <Content
+            title="Albums"
+            content={
+              <div ref={sliderRef} className="keen-slider">
+                {data.albums.items.map((album) => {
+                  return (
+                    <div key={album.id} className="keen-slider__slide">
+                      <AlbumCard
+                        albumId={album.id}
+                        coverartUrl={album.images[0]?.url}
+                        name={album.name}
                       />
                     </div>
                   );

@@ -120,7 +120,7 @@ export function AlbumTracks() {
           coverartUrl={data.images[0].url}
           description={data.label}
           name={data.name}
-          songsAmount={data.total_tracks}
+          songsAmount={isEmpty ? 0 : data.total_tracks}
         />
 
         {content}

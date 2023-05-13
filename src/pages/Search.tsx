@@ -1,18 +1,23 @@
 import { useParams } from 'react-router-dom';
+import { useKeenSlider } from 'keen-slider/react';
 
 import { useSearchForItemQuery } from '../features/songs/songsApiSlice';
 import { ErrorMessage } from '../components/ErrorMessage';
-import { useKeenSlider } from 'keen-slider/react';
 import { SongCard } from '../features/songs/SongCard';
 import { Content } from '../features/search/Content';
 import { ArtistCard } from '../features/artists/ArtistCard';
 import { AlbumCard } from '../features/songs/AlbumCard';
 import { PlaylistCard } from '../features/songs/PlaylistCard';
+import { Skeleton } from '../components/Skeleton/Skeleton';
+import { useSlidesPerView } from '../hooks/useSlidesPerView';
+import { SkeletonSongCard } from '../components/Skeleton/SkeletonSongCard';
+import { SkeletonArtistCard } from '../components/Skeleton/SkeletonArtistCard';
 
 export function Search() {
   const { query } = useParams();
-
   const { data, isLoading, isError } = useSearchForItemQuery(query);
+
+  const { slidesPerView } = useSlidesPerView();
 
   const [sliderRef] = useKeenSlider<HTMLDivElement>({
     slides: { perView: 1 },
@@ -33,7 +38,29 @@ export function Search() {
   });
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
+        <div className="w-full flex flex-col gap-3 mt-4">
+          <Skeleton classes="title width-50" />
+
+          <div className="w-full flex gap-2 justify-between">
+            {[...Array(slidesPerView).keys()].map((item) => {
+              return <SkeletonSongCard key={item} />;
+            })}
+          </div>
+        </div>
+
+        <div className="w-full flex flex-col gap-3 mt-4">
+          <Skeleton classes="title width-50" />
+
+          <div className="w-full flex gap-2 justify-between">
+            {[...Array(slidesPerView).keys()].map((item) => {
+              return <SkeletonArtistCard key={item} />;
+            })}
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (!data || isError) {

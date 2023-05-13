@@ -7,6 +7,7 @@ import { SongCard } from '../features/songs/SongCard';
 import { Content } from '../features/search/Content';
 import { ArtistCard } from '../features/artists/ArtistCard';
 import { AlbumCard } from '../features/songs/AlbumCard';
+import { PlaylistCard } from '../features/songs/PlaylistCard';
 
 export function Search() {
   const { query } = useParams();
@@ -42,8 +43,6 @@ export function Search() {
       </div>
     );
   }
-
-  console.log(data);
 
   return (
     <section className="h-full w-full overflow-auto hide-scrollbar">
@@ -99,6 +98,25 @@ export function Search() {
                         albumId={album.id}
                         coverartUrl={album.images[0]?.url}
                         name={album.name}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            }
+          />
+
+          <Content
+            title="Playlists"
+            content={
+              <div ref={sliderRef} className="keen-slider">
+                {data.playlists.items.map((playlist) => {
+                  return (
+                    <div key={playlist.id} className="keen-slider__slide">
+                      <PlaylistCard
+                        playlistId={playlist.id}
+                        coverartUrl={playlist.images[0]?.url}
+                        name={playlist.name}
                       />
                     </div>
                   );

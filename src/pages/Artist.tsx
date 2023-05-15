@@ -46,7 +46,7 @@ export function Artist() {
       <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
         <div className="mt-6 pb-40">
           <div className="w-full h-full">
-            <ArtistHeader name={data.name} imageUrl={data.images[0].url} />
+            <ArtistHeader name={data.name} imageUrl={data.images[0]?.url} />
 
             <ArtistTopTracks artistId={id} />
 

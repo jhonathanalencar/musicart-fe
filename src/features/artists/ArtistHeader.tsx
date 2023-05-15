@@ -1,4 +1,4 @@
-import { User, UserCircle } from 'phosphor-react';
+import { UserCircle } from 'phosphor-react';
 
 interface ArtistHeaderProps {
   name: string;

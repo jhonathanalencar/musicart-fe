@@ -15,7 +15,12 @@ import { SkeletonArtistCard } from '../components/Skeleton/SkeletonArtistCard';
 
 export function Search() {
   const { query } = useParams();
-  const { data, isLoading, isError } = useSearchForItemQuery(query);
+  const { data, isLoading, isError, isFetching } = useSearchForItemQuery(
+    query,
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
 
   const { slidesPerView } = useSlidesPerView();
 
@@ -37,7 +42,7 @@ export function Search() {
     },
   });
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <div className="h-full w-full max-w-[1400px] mx-auto px-2 md:px-6">
         <div className="w-full flex flex-col gap-3 mt-4">
@@ -80,6 +85,8 @@ export function Search() {
             content={
               <div ref={sliderRef} className="keen-slider">
                 {data.tracks.items.map((track, index) => {
+                  if (!track.preview_url) return null;
+
                   return (
                     <div key={track.id} className="keen-slider__slide">
                       <SongCard

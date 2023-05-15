@@ -9,7 +9,9 @@ export function SearchBar() {
   function handleSearch(event: FormEvent) {
     event.preventDefault();
 
-    navigate(`/search/${query}`);
+    if (query.trim().length > 0) {
+      navigate(`/search/${query}`);
+    }
   }
 
   return (

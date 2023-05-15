@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 
 import { useGetArtistByIdQuery } from '../features/artists/artistsApiSlice';
-
 import { ErrorMessage } from '../components/ErrorMessage';
 import { ArtistHeader } from '../features/artists/ArtistHeader';
 import { RelatedArtists } from '../features/artists/RelatedArtists';

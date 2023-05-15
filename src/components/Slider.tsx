@@ -53,7 +53,8 @@ export function Slider({ sliderItems }: SliderProps) {
     : sliderItems.tracks.filter((track) => track.preview_url);
 
   const disableNextSlide =
-    slideIndex + slidesPerView === itemsArray.length || itemsArray.length === 1;
+    slideIndex + slidesPerView === itemsArray.length ||
+    itemsArray.length <= slidesPerView;
   const disablePrevSlide = slideIndex === 0;
 
   const content = isAlbums(sliderItems)

@@ -1,4 +1,4 @@
-import { UserCircle } from 'phosphor-react';
+import { ArtistAvatarFallback } from './ArtistAvatarFallback';
 
 interface ArtistHeaderProps {
   name: string;
@@ -16,12 +16,7 @@ export function ArtistHeader({ imageUrl, name }: ArtistHeaderProps) {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full bg-violet-800 dark:bg-gray-600 flex items-center justify-center">
-            <UserCircle
-              className="w-full h-full text-gray-300 dark:text-gray-500"
-              weight="fill"
-            />
-          </div>
+          <ArtistAvatarFallback />
         )}
       </div>
       <strong className="text-3xl md:text-5xl text-gray-800 dark:text-white font-bold">

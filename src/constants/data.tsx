@@ -1,4 +1,4 @@
-import { House, Planet, Playlist } from 'phosphor-react';
+import { House, Planet } from 'phosphor-react';
 
 export const sidebarLinksData = [
   {
@@ -10,10 +10,5 @@ export const sidebarLinksData = [
     text: 'Explore',
     icon: <Planet weight="bold" />,
     href: '/explore',
-  },
-  {
-    text: 'Genres',
-    icon: <Playlist weight="bold" />,
-    href: '/genres',
   },
 ];

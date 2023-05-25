@@ -1,12 +1,16 @@
 <p align="center">
+  <img src=".github/musicart-logo.png" width="10%" />
+</p>
+ 
+<p align="center">
   <strong>Musicart</strong>
 </p>
-
+ 
 <p align="center">
   <a href="LICENSE"><img  src="https://img.shields.io/static/v1?label=License&message=MIT&color=763F3E&labelColor=202024" alt="License"></a>
 </p>
 
-<img src=".github/technotes-cover.png">
+<img src=".github/musicart-cover.png">
 
 ## 💻 Projeto
 

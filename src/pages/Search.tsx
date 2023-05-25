@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useKeenSlider } from 'keen-slider/react';
 
 import { useSearchForItemQuery } from '../features/songs/songsApiSlice';
+import { useSlidesPerView } from '../hooks/useSlidesPerView';
+import { setCurrentSongs } from '../features/player/playerSlice';
+import { keenSliderOptions } from '../configs/keenSlider';
+
 import { ErrorMessage } from '../components/ErrorMessage';
 import { SongCard } from '../features/songs/SongCard';
 import { Content } from '../features/search/Content';
@@ -9,38 +15,33 @@ import { ArtistCard } from '../features/artists/ArtistCard';
 import { AlbumCard } from '../features/songs/AlbumCard';
 import { PlaylistCard } from '../features/songs/PlaylistCard';
 import { Skeleton } from '../components/Skeleton/Skeleton';
-import { useSlidesPerView } from '../hooks/useSlidesPerView';
 import { SkeletonSongCard } from '../components/Skeleton/SkeletonSongCard';
 import { SkeletonArtistCard } from '../components/Skeleton/SkeletonArtistCard';
 
 export function Search() {
   const { query } = useParams();
-  const { data, isLoading, isError, isFetching } = useSearchForItemQuery(
-    query,
-    {
+  const dispatch = useDispatch();
+
+  const { data, isLoading, isError, isFetching, isSuccess } =
+    useSearchForItemQuery(query, {
       refetchOnMountOrArgChange: true,
-    }
-  );
+    });
 
   const { slidesPerView } = useSlidesPerView();
 
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    slides: { perView: 1 },
-    breakpoints: {
-      '(min-width: 35em)': {
-        slides: { perView: 2, spacing: 5 },
-      },
-      '(min-width: 45em)': {
-        slides: { perView: 3, spacing: 5 },
-      },
-      '(min-width: 50em)': {
-        slides: { perView: 4, spacing: 5 },
-      },
-      '(min-width: 60em)': {
-        slides: { perView: 5, spacing: 10 },
-      },
-    },
-  });
+  const [sliderRef] = useKeenSlider<HTMLDivElement>(keenSliderOptions);
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(
+        setCurrentSongs(
+          data.tracks.items
+            .map((track) => track)
+            .filter((track) => track.preview_url?.length)
+        )
+      );
+    }
+  }, [data, dispatch, isSuccess]);
 
   if (isLoading || isFetching) {
     return (

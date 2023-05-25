@@ -1,8 +1,10 @@
 import 'keen-slider/keen-slider.min.css';
+
 import { forwardRef } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 
 import { useGetPlaylistsByCategoryQuery } from './songsApiSlice';
+import { keenSliderOptions } from '../../configs/keenSlider';
 
 import { PlaylistCard } from './PlaylistCard';
 import { SkeletonPlaylistCard } from '../../components/Skeleton/SkeletonPlaylistCard';
@@ -20,23 +22,7 @@ export const PlaylistCategory = forwardRef<
   const { data, isLoading, isError } =
     useGetPlaylistsByCategoryQuery(categoryId);
 
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    slides: { perView: 1 },
-    breakpoints: {
-      '(min-width: 35em)': {
-        slides: { perView: 2, spacing: 5 },
-      },
-      '(min-width: 45em)': {
-        slides: { perView: 3, spacing: 5 },
-      },
-      '(min-width: 50em)': {
-        slides: { perView: 4, spacing: 5 },
-      },
-      '(min-width: 60em)': {
-        slides: { perView: 5, spacing: 10 },
-      },
-    },
-  });
+  const [sliderRef] = useKeenSlider<HTMLDivElement>(keenSliderOptions);
 
   if (isLoading) {
     return (

@@ -16,6 +16,8 @@
 
 Aplicação para descobrir novas músicas e artistas.
 
+[Acesse a aplicação online](https://musicart-sy.vercel.app/)
+
 ## 🧪 Tecnologias
 
 - [TypeScript](https://www.typescriptlang.org/)
